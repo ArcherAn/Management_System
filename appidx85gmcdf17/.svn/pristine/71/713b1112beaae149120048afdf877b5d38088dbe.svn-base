@@ -1,0 +1,153 @@
+<extend name="Myapp/Tpl/Public/model.html"/>
+<block name="title"><title>温度信息</title></block>
+<block name="content">
+<script>
+document.getElementById('yuyang').click();
+</script>
+    <script>
+        function jump(){
+            window.location="__APP__/Seedlings/Shed/addtempinfo";
+        }
+    </script>
+    <div>
+        <div style="height: 50px">
+            <span style="margin-top: 5px;font-size: 28px">阅读器管理</span><span style="font-size: 14px;margin-top: 3px;">&nbsp;育秧管理平台</span>
+        </div>
+        <div style="background-color: #b1bab7;height: 30px">
+            <span style="margin-top: 5px;float: left">主页&nbsp;>&nbsp;育秧&nbsp;>&nbsp;大棚管理&nbsp;>&nbsp;温度信息</span>
+        </div>
+        <div  style="margin-top: 10px;">
+            <form action="__APP__/Seedlings/Shed/tempinfo" method="get">
+                <span style="font-size: 16px;float: left">温度编号：</span>
+                <span style="float: left;margin-left: 10px"><input name="tempid" type="text" placeholder="请输入要搜索的温度编号" class="form-control"style="width: 200px;height: 30px"></span>
+                <span><button type="submit" class="btn btn-primary btn-sm" style="float: left;margin-left: 10px;">查询</button></span>
+                <span><button type="button" class="btn btn-success btn-sm" style="float: left;margin-left: 10px" onclick="jump()">新增信息</button></span>
+            </form>
+        </div>
+        <div>
+            <table  class="table table-striped table-bordered" style="margin-top: 50px;align:center;">
+                <thead>
+                <tr>
+                    <th>温度编号</th>
+                    <th>最高温度</th>
+                    <th>最低温度</th>
+                    <th>平均温度</th>
+                    <th>累计温度</th>
+                    <th>日期</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <volist name='data' id='vo'>
+                    <tr>
+                        <td><{$vo.tempid}></td>
+                        <td><{$vo.highesttemp}>℃</td>
+                        <td><{$vo.lowesttemp}>℃</td>
+                        <td><{$vo.averagetemp}>℃</td>
+                        <td><{$vo.cumulativetemp}>℃</td>
+                        <td><{$vo.date}></td>
+                        <td><a href="__APP__/Seedlings/Shed/modifytempinfo/id/<{$vo.id}>">修改</a>|
+                            <a href="__APP__/Seedlings/Shed/deletetempinfo/id/<{$vo.id}>"onclick="return confirm('是否删除？')">删除</a>
+                        </td>
+                    </tr>
+                </volist>
+                </tbody>
+            </table>
+        </div>
+        <div align="center"><{$page}></div>
+    </div>
+	<div>
+
+  <!--[if lt IE 9]><script language="javascript" type="text/javascript" src="../excanvas.js"></script><![endif]-->
+  
+  <link rel="stylesheet" type="text/css" href="/Public/jqplot/jquery.jqplot.css" />
+  
+  <!-- BEGIN: load jquery -->
+  <script language="javascript" type="text/javascript" src="/Public/jqplot/jquery-1.4.4.min.js"></script>
+  <!-- END: load jquery -->
+  
+  <!-- BEGIN: load jqplot -->
+  <script language="javascript" type="text/javascript" src="/Public/jqplot/jquery.jqplot.js"></script>
+  <script language="javascript" type="text/javascript" src="/Public/jqplot/plugins/jqplot.canvasAxisLabelRenderer.js"></script>
+  <script language="javascript" type="text/javascript" src="/Public/jqplot/plugins/jqplot.categoryAxisRenderer.js"></script>
+  <script language="javascript" type="text/javascript" src="/Public/jqplot/plugins/jqplot.pointLabels.js"></script>
+  <script language="javascript" type="text/javascript" src="/Public/jqplot/plugins/jqplot.enhancedLegendRenderer.js"></script>
+  <!-- END: load jqplot -->
+  <script type="text/javascript" language="javascript">
+ 
+  $(document).ready(function(){
+      $.jqplot.config.enablePlugins = true;
+	  
+	  function Array_2(nRow,nColumn){
+        var array1=new Array(); //定义一维数组
+        for(i=0;i<nRow;i++){
+                       //将每一个子元素又定义为数组
+            array1[i]=new Array(); 
+　　　　　　　　　for(n=0;n<nColumn;n++){
+                array1[i][n] = ''; //此时aa[i][n]可以看作是一个二级数组
+            }
+　　　　　　 }
+        return array1;
+      }
+	  
+	   
+       var count='<{$count}>';	   
+       var str= '<{$data[0][highesttemp]}>';
+	   var data1=Array_2(count,2);
+	   var data2=Array_2(count,2);
+	   var date=new Array();
+	   var json='<{$json}>';
+	   var json1=JSON.parse(json);
+	   
+	   var x=1;
+	   for (var i in json1)
+	   {
+         
+         data1[i][1]=json1[i]['highesttemp'];
+		 data1[i][0]=x;
+         x=x+1;
+	   }
+	  var x=1;
+	  for (var i in json1)
+	   {
+         
+         data2[i][1]=json1[i]['lowesttemp'];
+		 data2[i][0]=x;
+         x=x+1;
+	   }
+	    var x=1;
+	  for (var i in json1)
+	   {
+         
+         date[i]=String(json1[i]['date']);
+	   }
+	   
+	  
+    $.jqplot('chart1', [data1,data2], {
+	title:'最近10条最高温和最低温趋势图',
+	renderer: jQuery.jqplot.pointLabels,
+	rendererOptions: {
+	show: true, //是否显示光标 
+    showTooltip: false, // 是否显示提示信息栏 
+    followMouse: false},
+      legend:{renderer: $.jqplot.EnhancedLegendRenderer,show:true,location:'nw'},
+	axes: {
+	         yaxis:{max:60},
+             xaxis: {renderer: $.jqplot.CategoryAxisRenderer,min:0,max:10,numberTicks:10,ticks:date}
+         },
+		 cursor: {showTooltip: true, // 是否显示提示信息栏 
+         followMouse: false, //光标的提示信息栏是否随光标（鼠标）一起移动 
+         tooltipLocation: 'se', },
+      series:[
+        {label:'最高温(单位:℃)'},
+		{label:'最低温(单位:℃)'}
+      ]
+    });
+  });
+  
+  </script>
+
+
+    <div id="chart1" style="margin-top:20px; margin-left:20px; width:600px; height:300px;"></div>
+  </div>
+</block>

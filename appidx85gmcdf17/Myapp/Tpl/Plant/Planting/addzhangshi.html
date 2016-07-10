@@ -1,0 +1,170 @@
+<extend name="Myapp/Tpl/Public/model.html"/>
+<block name="title"><title>秧苗长势信息添加</title></block>
+<block name="diyStyle">
+    <style>
+        div.table-responsive{margin-left:5%;margin-top:1%;}
+    </style>
+</block>
+<block name="content">
+    <div class="table-responsive">
+        <form action="__APP__/Plant/Planting/insert_database_zhangshi" method="post">
+            <table class="table table-bordered">
+                <tr style="height:45px">
+                    <td colspan="5" align="center" bgcolor="#E9E9E9">秧苗长势信息添加表</td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="width: 150px;background-color:#E9E9E9">秧苗批次号</td>
+                    <td ><input class="form-control" placeholder="如：0001" style="width: 250px;height: 30px" id="seedingid" type="text" /></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color:#E9E9E9">长势</td>
+                    <td><input class="form-control" placeholder="如：" style="width: 250px;height: 30px" id="potential" type="text" /></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color:#E9E9E9">密度</td>
+                    <td><input class="form-control" placeholder="如：" style="width: 250px;height: 30px" id="density" type="text" /></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color:#E9E9E9">株高</td>
+                    <td><input class="form-control" placeholder="如：12" style="width: 250px;height: 30px" id="high" type="text" /></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color:#E9E9E9">叶片数</td>
+                    <td><input class="form-control" placeholder="如：23" style="width: 250px;height: 30px" id="leafnumber" type="text"/></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color: #E9E9E9">叶片长度</td>
+                    <td><input class="form-control" placeholder="如：12" style="width: 250px;height: 30px" id="leaflength" type="text"/></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color: #E9E9E9">叶片宽度</td>
+                    <td><input class="form-control" placeholder="如：2" style="width: 250px;height: 30px" id="leafwidth" type="text"/></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color: #E9E9E9">叶色情况</td>
+                    <td><input class="form-control" placeholder="如：" style="width: 250px;height: 30px" id="leafcolor" type="text"/></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color: #E9E9E9">叶厚</td>
+                    <td><input class="form-control" placeholder="如：" style="width: 250px;height: 30px" id="leafthickness" type="text"/></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color: #E9E9E9">生物量</td>
+                    <td><input class="form-control" placeholder="如：" style="width: 250px;height: 30px" id="biomass" type="text"/></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color: #E9E9E9">虫害</td>
+                    <td><input class="form-control" placeholder="如：" style="width: 250px;height: 30px" id="insectpests" type="text"/></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color: #E9E9E9">日期</td>
+                    <td>
+                        <div class="form-group">
+                            <div class="input-group date form_date"data-date="" data-date-format="" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                                <input class="form-control" placeholder="如：2015-3-15" style="width: 250px;height: 30px" id="date" type="text" name='purchasedate' onclick="change_ipt" value="" readonly/>
+                                <span class="input-group-addon" style="float: left"><span class="glyphicon glyphicon-calendar"></span></span>
+                            </div>
+                            <input type="hidden" id="dtp_input2" value="" /><br/>
+                        </div>
+                    </td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color:#E9E9E9"></td>
+                    <td><input class="btn btn-primary" id="apply" type="submit" value="确认添加"/></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <script>
+        $(function() {
+            $("#apply").click(function(){
+                if(confirm('确认添加？')){
+                    var a=$('#seedingid').val();
+                    var b=$('#potential').val();
+                    var c=$('#density').val();
+                    var d=$('#high').val();
+                    var e=$('#leafnumber').val();
+                    var f=$('#leaflength').val();
+                    var g=$('#leafwidth').val();
+                    var h=$('#leafcolor').val();
+                    var i=$('#leafthickness').val();
+                    var j=$('#biomass').val();
+                    var k=$('#insectpests').val();
+                    var l=$('#date').val();
+                    var url='__APP__/Plant/Planting/insert_database_zhangshi';
+                    if(a == ""){
+                        alert("请填写秧苗批次号！");
+                        return false;}
+                    if(b == "") {
+                        alert("请填写长势！");
+                        return false;}
+                    if(c == "") {
+                        alert("请填写密度！");
+                        return false;}
+                    if(d == "") {
+                        alert("请填写株高！");
+                        return false;}
+                    if(e == "") {
+                        alert("请填写叶片数！");
+                        return false;}
+                    if(f == ""){
+                        alert("请填写叶片长度！");
+                        return false;}
+                    if(g == ""){
+                        alert("请填写叶片宽度！");
+                        return false;}
+                    if(h == ""){
+                        alert("请填写叶色情况！");
+                        return false;}
+                    if(i == ""){
+                        alert("请填写叶厚！");
+                        return false;}
+                    if(j == ""){
+                        alert("请填写生物量！");
+                        return false;}
+                    if(k == ""){
+                        alert("请填写虫害！");
+                        return false;}
+                    if(l == ""){
+                        alert("请填写日期！");
+                        return false;}
+                    var data={
+                        seedingid:a,
+                        potential:b,
+                        density:c,
+                        high:d,
+                        leafnumber:e,
+                        leaflength:f,
+                        leafwidth:g,
+                        leafcolor:h,
+                        leafthickness:i,
+                        biomass:j,
+                        insectpests:k,
+                        date:l,
+                        hidden:$('#hash').val()
+                    };
+                    $(this).attr("disabled",true);
+                    $(this).val("数据处理中.....");
+                    $.post(url,data,function(data){
+                        alert(data.info);
+                        window.location.href=data.url;
+                    });
+                    $(this).val("数据处理成功.....");
+                    return true;
+                }
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        $('.form_date').datetimepicker({
+            language: 'zh-CN',
+            weekStart: 1,
+            todayBtn: 1,
+            autoclose: 1,
+            todayHighlight: 1,
+            startView: 2,
+            minView: 2,
+            forceParse: 0
+        });
+    </script>
+</block>

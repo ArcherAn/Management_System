@@ -1,0 +1,107 @@
+<extend name="Myapp/Tpl/Public/model.html"/>
+<block name="title"><title>设备维护信息添加</title></block>
+<block name="diyStyle">
+    <style>
+        div.table-responsive{margin-left:5%;margin-top:1%;}
+    </style>
+</block>
+<block name="content">
+    <div class="table-responsive">
+        <form action="__APP__/Seedlings/Equip/insert_database_maintain" method="post">
+            <table class="table table-bordered" style="border: 1px solid red">
+                <tr style="height:45px">
+                    <td colspan="5" align="center" bgcolor="#E9E9E9">设备维护信息添加表</td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="width: 150px;background-color:#E9E9E9">设备编号</td>
+                    <td ><input class="form-control" placeholder="如：0001" style="width: 250px;height: 30px" id="equipmentid" type="text" /></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color:#E9E9E9">维护周期</td>
+                    <td><input class="form-control" placeholder="如：12h" style="width: 250px;height: 30px" id="period" type="text" /></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color:#E9E9E9">维护原因</td>
+                    <td><input class="form-control" placeholder="如：清洗" style="width: 250px;height: 30px" id="reason" type="text" /></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color:#E9E9E9">维护员</td>
+                    <td><input class="form-control" placeholder="如：张三" style="width: 250px;height: 30px" id="person" type="text"/></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color: #E9E9E9">维护日期</td>
+                    <td>
+                        <div class="form-group">
+                            <div class="input-group date form_date"data-date="" data-date-format="" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                                <input class="form-control" placeholder="如：2015-3-15" style="width: 250px;height: 30px" id="date" type="text" readonly/>
+                                <span class="input-group-addon" style="float: left"><span class="glyphicon glyphicon-calendar"></span></span>
+                            </div>
+                            <input type="hidden" id="dtp_input2" value="" /><br/>
+                        </div>
+                    </td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color:#E9E9E9"></td>
+                    <td><input class="btn btn-primary" id="apply" type="submit" value="确认添加"/></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <script>
+        $(function() {
+            $("#apply").click(function(){
+                if(confirm('确认添加？')){
+                    var a=$('#equipmentid').val();
+                    var b=$('#period').val();
+                    var c=$('#reason').val();
+                    var d=$('#person').val();
+                    var e=$('#date').val();
+                    var url='__APP__/Seedlings/Equip/insert_database_maintain';
+                    if(a == ""){
+                        alert("请填写设备编号！");
+                        return false;}
+                    if(b == "") {
+                        alert("请填写维护周期！");
+                        return false;}
+                    if(c == "") {
+                        alert("请填写维护原因！");
+                        return false;}
+                    if(d == "") {
+                        alert("请填写维护员！");
+                        return false;}
+                    if(e == "") {
+                        alert("请填写维护日期！");
+                        return false;}
+                    var data={
+                        equipmentid:a,
+                        period:b,
+                        reason:c,
+                        person:d,
+                        date:e,
+                        hidden:$('#hash').val()
+                    };
+                    $(this).attr("disabled",true);
+                    $(this).val("数据处理中.....");
+                    $.post(url,data,function(data){
+                        alert(data.info);
+                        window.location.href=data.url;
+                    });
+                    $(this).val("数据处理成功.....");
+                    return true;
+                }
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        $('.form_date').datetimepicker({
+            language: 'zh-CN',
+            weekStart: 1,
+            todayBtn: 1,
+            autoclose: 1,
+            todayHighlight: 1,
+            startView: 2,
+            minView: 2,
+            forceParse: 0
+        });
+    </script>
+</block>

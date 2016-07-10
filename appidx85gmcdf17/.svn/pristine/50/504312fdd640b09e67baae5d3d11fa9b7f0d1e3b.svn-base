@@ -1,0 +1,37 @@
+<extend name="Myapp/Tpl/Public/model.html"/>
+<block name="title"><title>农田环境信息修改</title></block>
+<block name="content">
+    <div style="margin-top:1%">
+        <form action="__APP__/Plant/Farmland/updateenvironment" method="post">
+            <table class="table table-bordered">
+                <tr style="height:45px">
+                    <td colspan="5" align="center" bgcolor="#E9E9E9">农田环境信息修改</td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="width: 150px;background-color:#E9E9E9">农田编号</td>
+                    <td ><input class="form-control" style="width: 250px;height: 30px" type="text" name='farmlandid'  value="<{$data.farmlandid}>"/></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color:#E9E9E9">气象编号</td>
+                    <td><input class="form-control"  style="width: 250px;height: 30px" type="text" name='meteorologicalid'value="<{$data.meteorologicalid}>"/></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color:#E9E9E9">土壤编号</td>
+                    <td><input class="form-control"  style="width: 250px;height: 30px" type="text" name='soilid'  value="<{$data.soilid}>"/></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color:#E9E9E9">水资源编号</td>
+                    <td><input class="form-control"  style="width: 250px;height: 30px" type="text" name='waterid'  value="<{$data.waterid}>"/></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color:#E9E9E9">日期</td>
+                    <td><input class="form-control"  style="width: 250px;height: 30px" type="text" name='date'  value="<{$data.date}>"/></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color:#E9E9E9"></td>
+                    <td><input type='hidden' name='id' value="<{$data.id}>"/><input class="btn btn-primary" type="submit" value="确认修改" onclick="return confirm('是否确认？')"/></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</block>

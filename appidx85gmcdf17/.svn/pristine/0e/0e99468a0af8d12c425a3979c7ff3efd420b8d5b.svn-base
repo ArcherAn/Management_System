@@ -1,0 +1,11 @@
+<extend name="Myapp/Tpl/Public/model.html"/>
+<block name="title"><title></title></block>
+<block name="content">
+<div  style="margin-top: 10px;">
+    <form action="__APP__/Trace/Seedplant/find" method="get">
+        <span style="font-size: 16px;float: left">秧苗编号：</span>
+        <span style="float: left;margin-left: 10px"><input name="keywords" type="text" placeholder="请输入要搜索的类型" class="form-control"style="width: 200px;height: 30px"></span>
+        <span><button type="submit" class="btn btn-primary btn-sm" style="float: left;margin-left: 10px;">查询</button></span>
+    </form>
+</div>
+</block>

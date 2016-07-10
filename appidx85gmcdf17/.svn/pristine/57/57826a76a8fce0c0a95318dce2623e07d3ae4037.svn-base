@@ -1,0 +1,37 @@
+<extend name="Myapp/Tpl/Public/model.html"/>
+<block name="title"><title>设备维护信息修改</title></block>
+<block name="content">
+    <div style="margin-top:1%">
+        <form action="__APP__/Seedlings/Equip/updatemaintain" method="post">
+            <table class="table table-bordered">
+                <tr style="height:45px">
+                    <td colspan="5" align="center" bgcolor="#E9E9E9">设备维护信息修改</td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="width: 150px;background-color:#E9E9E9">设备编号</td>
+                    <td ><input class="form-control" placeholder="如：1" style="width: 250px;height: 30px" type="text" name='equipmentid'  value="<{$data.equipmentid}>"/></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color:#E9E9E9">维护周期</td>
+                    <td><input class="form-control" placeholder="如：插秧机" style="width: 250px;height: 30px" type="text" name='period'value="<{$data.period}>"/></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color:#E9E9E9">维护原因</td>
+                    <td><input class="form-control" placeholder="如：2ZT63" style="width: 250px;height: 30px" type="text" name='reason'  value="<{$data.reason}>"/></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color:#E9E9E9">维护员</td>
+                    <td><input class="form-control" placeholder="如：东风" style="width: 250px;height: 30px" type="text" name='person'  value="<{$data.person}>"/></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color: #E9E9E9">维护日期</td>
+                    <td><input class="form-control" placeholder="如：2015-03-25" style="width: 250px;height: 30px" type="text" name='date'  value="<{$data.date}>"/></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color:#E9E9E9"></td>
+                    <td><input type='hidden' name='id' value="<{$data.id}>"/><input class="btn btn-primary" type="submit" value="确认修改" onclick="return confirm('是否确认？')"/></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</block>

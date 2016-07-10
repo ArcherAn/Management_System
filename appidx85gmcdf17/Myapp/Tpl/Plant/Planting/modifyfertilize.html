@@ -1,0 +1,57 @@
+<extend name="Myapp/Tpl/Public/model.html"/>
+<block name="title"><title>施肥操作信息修改</title></block>
+<block name="content">
+    <div style="margin-top:1%">
+        <form action="__APP__/Plant/Planting/updatefertilize" method="post">
+            <table class="table table-bordered" style="border: 1px solid red">
+                <tr style="height:45px">
+                    <td colspan="5" align="center" bgcolor="#E9E9E9">施肥操作信息修改</td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color:#E9E9E9">农田编号</td>
+                    <td><input class="form-control"  style="width: 250px;height: 30px" type="text" name='farmlandid' value="<{$data.farmlandid}>"/></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color:#E9E9E9">化肥名称</td>
+                    <td><input class="form-control"  style="width: 250px;height: 30px" type="text" name='name' value="<{$data.name}>"/></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color:#E9E9E9">成分1</td>
+                    <td><input class="form-control"  style="width: 250px;height: 30px" type="text" name='ingredients1' value="<{$data.ingredients1}>"/></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color:#E9E9E9">成分2</td>
+                    <td><input class="form-control"  style="width: 250px;height: 30px" type="text" name='ingredients2' value="<{$data.ingredients2}>"/></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color:#E9E9E9">成分3</td>
+                    <td><input class="form-control"  style="width: 250px;height: 30px" type="text" name='ingredients3' value="<{$data.ingredients3}>"/></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color:#E9E9E9">操作员</td>
+                    <td><input class="form-control" style="width: 250px;height: 30px" type="text" name='operator'  value="<{$data.operator}>"/></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color:#E9E9E9">日期</td>
+                    <td><input class="form-control"  style="width: 250px;height: 30px" type="text" name='date'  value="<{$data.date}>" onClick="WdatePicker()"/></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color:#E9E9E9"></td>
+                    <td><input type='hidden' name='id' value="<{$data.id}>"/><input class="btn btn-primary" type="submit" value="确认修改" onclick="return confirm('是否确认？')"/></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <script type="text/javascript">
+        $('.form_date').datetimepicker({
+            language: 'zh-CN',
+            weekStart: 1,
+            todayBtn: 1,
+            autoclose: 1,
+            todayHighlight: 1,
+            startView: 2,
+            minView: 2,
+            forceParse: 0
+        });
+    </script>
+</block>

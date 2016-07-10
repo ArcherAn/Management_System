@@ -1,0 +1,48 @@
+<extend name="Myapp/Tpl/Public/model.html"/>
+<block name="title"><title>设备信息添加（加工）</title></block>
+block name="diyStyle">
+<style>
+    div.table-responsive{margin-left:5%;margin-top:1%;}
+</style>
+</block>
+    <block name="content">
+        <div class="table-responsive">
+            <form action="__APP__/Process/Equip/insert_database" method="post">
+            <table class="table table-bordered" style="border: 1px solid red">
+                <tr style="height:45px">
+                    <td colspan="5" align="center" bgcolor="#E9E9E9">设备信息添加表</td>
+                </tr>
+                 <tr style="height:45px">
+                    <td style="width: 150px;background-color:#E9E9E9">机器编号</td>
+                     <td ><input class="form-control" placeholder="如：20080101" style="width: 250px;height: 30px" id="machineid" type="text" name='machineid' onclick="change_ipt" value=""/></td>
+                 </tr>
+                <tr style="height:45px">
+                    <td style="background-color:#E9E9E9">类型</td>
+                    <td><input class="form-control" placeholder="如：收割机" style="width: 250px;height: 30px" id="type" type="text" name='type' onclick="change_ipt"value="" /></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color:#E9E9E9">型号</td>
+                    <td><input class="form-control" placeholder="如：ZX304" style="width: 250px;height: 30px" id="model" type="text" name='model' onclick="change_ipt" value=""/></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color:#E9E9E9">工作线</td>
+                    <td><input class="form-control" placeholder="如：一号线" style="width: 250px;height: 30px" id="workline" type="text" name='workline' onclick="change_ipt" value=""/></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color: #E9E9E9">状态</td>
+                    <td><input class="form-control" placeholder="如：正常" style="width: 250px;height: 30px" id="status" type="text" name='status' onclick="change_ipt" value=""/></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color: #E9E9E9">购买日期</td>
+                    <td><input class="form-control" placeholder="如：20080101" style="width: 250px;height: 30px" id="purchasedate" type="text" name='purchasedate' onclick="change_ipt" value=""/></td>
+                </tr>
+                       
+      <tr style="height:45px">
+                    <td style="background-color:#E9E9E9"></td>
+                    <td><input class="btn btn-primary" id="apply_sumbit" type="submit" value="确认添加" onclick="return confirm('确认添加？')"/></td>
+                </tr>
+            </table>
+            </form>
+        </div>
+
+    </block>

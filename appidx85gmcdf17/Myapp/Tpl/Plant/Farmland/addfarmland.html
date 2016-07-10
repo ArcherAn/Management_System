@@ -1,0 +1,78 @@
+<extend name="Myapp/Tpl/Public/model.html"/>
+<block name="title"><title>农田信息添加</title></block>
+<block name="diyStyle">
+    <style>
+        div.table-responsive{margin-left:5%;margin-top:1%;}
+    </style>
+</block>
+<block name="content">
+    <div class="table-responsive">
+        <form action="__APP__/Plant/Farmland/insert_database_farmland" method="post">
+            <table class="table table-bordered">
+                <tr style="height:45px">
+                    <td colspan="5" align="center" bgcolor="#E9E9E9">农田信息添加</td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="width: 150px;background-color:#E9E9E9">农田编号</td>
+                    <td ><input class="form-control" placeholder="如：1" style="width: 250px;height: 30px" id="farmlandid" type="text" /></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color:#E9E9E9">地点</td>
+                    <td><input class="form-control" placeholder="如：立新乡" style="width: 250px;height: 30px" id="site" type="text" /></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color:#E9E9E9">面积</td>
+                    <td><input class="form-control" placeholder="如：12" style="width: 250px;height: 30px" id="area" type="text" /></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color:#E9E9E9">负责人</td>
+                    <td><input class="form-control" placeholder="如：张三" style="width: 250px;height: 30px" id="head" type="text"/></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color:#E9E9E9"></td>
+                    <td><input class="btn btn-primary" id="apply" type="submit" value="确认添加"/></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <script>
+        $(function() {
+            $("#apply").click(function(){
+                if(confirm('确认添加？')){
+                    var a=$('#farmlandid').val();
+                    var b=$('#site').val();
+                    var c=$('#area').val();
+                    var d=$('#head').val();
+                    var url='__APP__/Plant/Farmland/insert_database_farmland';
+                    if(a == ""){
+                        alert("请填写农田编号！");
+                        return false;}
+                    if(b == "") {
+                        alert("请填写地点！");
+                        return false;}
+                    if(c == "") {
+                        alert("请填写面积！");
+                        return false;}
+                    if(d == "") {
+                        alert("请填写负责人！");
+                        return false;}
+                    var data={
+                        farmlandid:a,
+                        site:b,
+                        area:c,
+                        head:d,
+                        hidden:$('#hash').val()
+                    };
+                    $(this).attr("disabled",true);
+                    $(this).val("数据处理中.....");
+                    $.post(url,data,function(data){
+                        alert(data.info);
+                        window.location.href=data.url;
+                    });
+                    $(this).val("数据处理成功.....");
+                    return true;
+                }
+            });
+        });
+    </script>
+</block>

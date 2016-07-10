@@ -1,0 +1,181 @@
+<?php
+
+class OuterAction extends Action {
+	/************** 外包信息 start ******************/
+	public function package(){
+		$right = getRight(session('user'),'deepprocess-packageinfo');
+		if ( $right == '0000') {
+			$this->error('您没有权限查看,请检查权限配置或用户角色是否正确');
+		}else {
+	    	$m = M('deepprocess-packageinfo');
+	    	// 分页查询
+		    import('ORG.Util.Page');
+		    $keywords = $_GET['batchid'];
+	        $map = "batchid like '%$keywords%'";
+	        $count = $m->where($map)->count(); //查询满足要求的总记录数 $map表示查询条件
+	        $Page = new Page($count,8);// 实例化分页类 传入总记录数
+	        $show  = $Page->show();// 分页显示输出
+	        $list = $m->where($map)->order('id')->limit($Page->firstRow.','.$Page->listRows)->select();
+	        $this->assign('data',$list);// 赋值数据集
+	        $this->assign('page',$show);// 赋值分页输出
+	        $this->assign('right',$right);// 赋值权限
+	        $this->display();
+		}
+	}
+    //修改数据
+    public function updatePkg(){
+        $m=M('deepprocess-packageinfo');  //选表
+		$data['id']=$_POST['id'];
+        $data['batchid']=$_POST['batchid'];
+        $data['weight']=$_POST['weight'];
+        $data['quality']=$_POST['quality'];
+        $data['operator']=$_POST['operator'];
+        $data['date']=$_POST['date'];
+        $count=$m->save($data);
+        if($count){
+            $this->success("数据修改成功","__APP__/Deepprocess/Outer/package");
+        }else{
+            $this->error('数据修改失败');
+        }
+    }
+    //显示修改页面
+    public function modifyPkg(){
+        $id=$_GET['id'];
+        $m=M('deepprocess-packageinfo');
+        $arr=$m->find($id);
+        $this->assign('data',$arr);
+        $this->display();
+    }
+    //删除数据
+    public function deletePkg(){
+        $m=M('deepprocess-packageinfo');
+        $id=$_GET['id'];
+        $count=$m->delete($id);
+        if($count){
+            $this->success('数据删除成功','__APP__/Deepprocess/Outer/package');
+        }else{
+            $this->error('数据删除失败');
+        }
+    }
+    //显示添加页面
+    public function addPkg(){
+        $this->display();
+    }
+    public function insert_database_pkg(){
+        session_start();
+        $id=$_POST['hidden'];
+        if($_SESSION['id']!=$id) {return;}
+        $data=array(
+            'batchid'=>$_POST['batchid'],
+            'weight'=>$_POST['weight'],
+            'quality'=>$_POST['quality'],
+            'operator'=>$_POST['operator'],
+            'date'=>$_POST['date']
+        );
+        $db=M('deepprocess-packageinfo');
+        $res=$db->add($data);
+        if($res){
+        	$ajaxData['info']='数据添加成功';
+        	$ajaxData['url']=U('__APP__/Deepprocess/Outer/package');
+        	$ajaxData['status']=1;
+        	$this->ajaxReturn($ajaxData,'JSON');
+        }else{
+        	$ajaxData['url']=U('__APP__/Deepprocess/Outer/addPkg');
+			$ajaxData['info']='数据添加失败';
+			$ajaxData['status']=0;
+            $this->ajaxReturn($ajaxData,'JSON');
+        }
+    }
+    /************** 外包信息 end ******************/
+    /************** 装箱信息 start ******************/
+	public function packing(){
+		//需要给溯源提供入口，所以不检查权限
+//		$right = getRight(session('user'),'deepprocess-packinginfo');
+//		if ( $right == '0000') {
+//			$this->error('您没有权限查看');
+//		}else {
+	    	$m = M('deepprocess-packinginfo');
+	    	// 分页查询
+		    import('ORG.Util.Page');
+		    $keywords = $_GET['batchid'];
+	        $map = "batchid like '%$keywords%'";
+	        $count = $m->where($map)->count(); //查询满足要求的总记录数 $map表示查询条件
+	        $Page = new Page($count,8);// 实例化分页类 传入总记录数
+	        $show  = $Page->show();// 分页显示输出
+	        $list = $m->where($map)->order('id')->limit($Page->firstRow.','.$Page->listRows)->select();
+	        $this->assign('data',$list);// 赋值数据集
+	        $this->assign('page',$show);// 赋值分页输出
+	        if ( session('userid') == '10001' ) {
+		        $right='1111';
+			}else {
+				$right='0001';
+			}
+	        $this->assign('right',$right);// 赋值权限
+	        $this->display();
+//		}
+	}
+    //修改数据
+    public function updatePacking(){
+        $m=M('deepprocess-packinginfo');  //选表
+		$data['id']=$_POST['id'];
+        $data['batchid']=$_POST['batchid'];
+        $data['amount']=$_POST['amount'];
+        $data['whereabouts']=$_POST['whereabouts'];
+        $data['date']=$_POST['date'];
+        $count=$m->save($data);
+        if($count){
+            $this->success("数据修改成功","__APP__/Deepprocess/Outer/packing");
+        }else{
+            $this->error('数据修改失败');
+        }
+    }
+    //显示修改页面
+    public function modifyPacking(){
+        $id=$_GET['id'];
+        $m=M('deepprocess-packinginfo');
+        $arr=$m->find($id);
+        $this->assign('data',$arr);
+        $this->display();
+    }
+    //删除数据
+    public function deletePacking(){
+        $m=M('deepprocess-packinginfo');
+        $id=$_GET['id'];
+        $count=$m->delete($id);
+        if($count){
+            $this->success('数据删除成功','__APP__/Deepprocess/Outer/packing');
+        }else{
+            $this->error('数据删除失败');
+        }
+    }
+    //显示添加页面
+    public function addPacking(){
+        $this->display();
+    }
+    public function insert_database_packing(){
+        session_start();
+        $id=$_POST['hidden'];
+        if($_SESSION['id']!=$id) {return;}
+        $data=array(
+            'batchid'=>$_POST['batchid'],
+            'amount'=>$_POST['amount'],
+            'whereabouts'=>$_POST['whereabouts'],
+            'date'=>$_POST['date']
+        );
+        $db=M('deepprocess-packinginfo');
+        $res=$db->add($data);
+        if($res){
+        	$ajaxData['info']='数据添加成功';
+        	$ajaxData['url']=U('__APP__/Deepprocess/Outer/packing');
+        	$ajaxData['status']=1;
+        	$this->ajaxReturn($ajaxData,'JSON');
+        }else{
+        	$ajaxData['url']=U('__APP__/Deepprocess/Outer/addPacking');
+			$ajaxData['info']='数据添加失败';
+			$ajaxData['status']=0;
+            $this->ajaxReturn($ajaxData,'JSON');
+        }
+    }
+    /************** 装箱信息 end ******************/
+}
+?>

@@ -1,0 +1,61 @@
+<extend name="Myapp/Tpl/Public/model.html"/>
+<block name="title"><title>种子设备信息修改</title></block>
+<block name="content">
+        <div style="margin-top:1%">
+            <form action="__APP__?s=Equip/update" method="post">
+                <table class="table table-bordered" style="border: 1px solid red">
+                    <tr style="height:45px">
+                        <td colspan="5" align="center" bgcolor="#E9E9E9">种子设备信息修改</td>
+                    </tr>
+                    <tr style="height:45px">
+                        <td style="width: 150px;background-color:#E9E9E9">机器编号</td>
+                        <td ><input class="form-control" placeholder="如：1" style="width: 250px;height: 30px" type="text" name='machineid'  value="<{$data.machineid}>"/></td>
+                    </tr>
+                    <tr style="height:45px">
+                        <td style="background-color:#E9E9E9">类型</td>
+                        <td><input class="form-control" placeholder="如：插秧机" style="width: 250px;height: 30px" type="text" name='type'value="<{$data.type}>"/></td>
+                    </tr>
+                    <tr style="height:45px">
+                        <td style="background-color:#E9E9E9">型号</td>
+                        <td><input class="form-control" placeholder="如：2ZT63" style="width: 250px;height: 30px" type="text" name='model'  value="<{$data.model}>"/></td>
+                    </tr>
+                    <tr style="height:45px">
+                        <td style="background-color:#E9E9E9">品牌</td>
+                        <td><input class="form-control" placeholder="如：东风" style="width: 250px;height: 30px" type="text" name='brand'  value="<{$data.brand}>"/></td>
+                    </tr>
+                    <tr style="height:45px">
+                        <td style="background-color: #E9E9E9">价格</td>
+                        <td><input class="form-control" placeholder="如：200000" style="width: 250px;height: 30px" type="text" name='price'  value="<{$data.price}>"/></td>
+                    </tr>
+                    <tr style="height:45px">
+                        <td style="background-color: #E9E9E9">状态</td>
+                        <td><input class="form-control" placeholder="如：故障" style="width: 250px;height: 30px" type="text" name='status'  value="<{$data.status}>"/></td>
+                    </tr>
+                    <tr style="height:45px">
+                        <td style="background-color: #E9E9E9">购买日期</td>
+                        <td><input class="form-control" placeholder="如：2015-03-25" style="width: 250px;height: 30px" type="text" name='purchasedate'  value="<{$data.purchasedate}>"/></td>
+                    </tr>
+                    <tr style="height:45px">
+                        <td style="background-color:#E9E9E9">使用年限</td>
+                        <td><input class="form-control" placeholder="如：8" style="width: 250px;height: 30px" type="text" name='useyear'  value="<{$data.useyear}>"/></td>
+                    </tr>
+                    <tr style="height:45px">
+                        <td style="background-color:#E9E9E9"></td>
+                        <td><input type='hidden' name='id' value="<{$data.id}>"/><input class="btn btn-primary" type="submit" value="确认修改" onclick="return confirm('是否确认？')"/></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    <script type="text/javascript">
+        $('.form_date').datetimepicker({
+            language: 'zh-CN',
+            weekStart: 1,
+            todayBtn: 1,
+            autoclose: 1,
+            todayHighlight: 1,
+            startView: 2,
+            minView: 2,
+            forceParse: 0
+        });
+    </script>
+    </block>

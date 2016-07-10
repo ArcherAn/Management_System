@@ -1,0 +1,41 @@
+<extend name="Myapp/Tpl/Public/model.html"/>
+<block name="title"><title>水信息修改</title></block>
+<block name="content">
+    <div style="margin-top:1%">
+        <form action="__APP__/Seedlings/Shed/updatewaterinfo" method="post">
+            <table class="table table-bordered">
+                <tr style="height:45px">
+                    <td colspan="5" align="center" bgcolor="#E9E9E9">水信息修改</td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="width: 150px;background-color:#E9E9E9">水编号</td>
+                    <td ><input class="form-control"  style="width: 250px;height: 30px" type="text" name='waterid'  value="<{$data.waterid}>"/></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color:#E9E9E9">绝对湿度</td>
+                    <td><input class="form-control" style="width: 250px;height: 30px" type="text" name='absolutehumidity'value="<{$data.absolutehumidity}>"/></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color:#E9E9E9">相对湿度</td>
+                    <td><input class="form-control"  style="width: 250px;height: 30px" type="text" name='relativehumidity'  value="<{$data.relativehumidity}>"/></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color:#E9E9E9">指标</td>
+                    <td><input class="form-control"  style="width: 250px;height: 30px" type="text" name='indicators1'  value="<{$data.indicators1}>"/></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color: #E9E9E9">指标2</td>
+                    <td><input class="form-control" style="width: 250px;height: 30px" type="text" name='indicators2'  value="<{$data.indicators2}>"/></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color:#E9E9E9">日期</td>
+                    <td><input class="form-control" style="width: 250px;height: 30px" type="text" name='date'  value="<{$data.date}>" onClick="WdatePicker()"/></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color:#E9E9E9"></td>
+                    <td><input type='hidden' name='id' value="<{$data.id}>"/><input class="btn btn-primary" type="submit" value="确认修改" onclick="return confirm('是否确认？')"/></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</block>

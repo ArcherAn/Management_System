@@ -1,0 +1,100 @@
+<?php
+
+class RoleAction extends Action{
+	public function index(){
+		$right = getRight(session('user'),'rms_role');
+		if ( $right == '0000') {
+			$this->error('您没有权限查看,请检查权限配置或用户角色是否正确');
+		}else {
+	    	$m = M('rms_role');
+	    	// 分页查询
+		    import('ORG.Util.Page');
+		    $keywords = $_GET['name'];
+	        $map = "role_name like '%$keywords%'";
+	        $count = $m->where($map)->count(); //查询满足要求的总记录数 $map表示查询条件
+	        $Page = new Page($count,8);// 实例化分页类 传入总记录数
+	        $show  = $Page->show();// 分页显示输出
+	        $list = $m->where($map)->order('id')->limit($Page->firstRow.','.$Page->listRows)->select();
+	        $this->assign('data',$list);// 赋值数据集
+	        $this->assign('page',$show);// 赋值分页输出
+	        $this->assign('right',$right);// 赋值权限
+	        $this->display();
+		}
+	}
+    //修改数据
+    public function update(){
+        $m=M('rms_role');  //选表
+		$data['id']=$_POST['id'];
+        $data['role_name']=$_POST['role_name'];
+        $count=$m->save($data);
+        if($count){
+            $this->success("数据修改成功","__APP__/User/Role/index");
+        }else{
+            $this->error('数据修改失败');
+        }
+    }
+    //显示修改页面
+    public function modify(){
+        $id=$_GET['id'];
+        $m=M('rms_role');
+        $arr=$m->find($id);
+        $this->assign('data',$arr);
+        $this->display();
+    }
+    //删除数据
+    public function delete(){
+        $m=M('rms_role');
+        $m2=M('rms_right_role_tables');
+        $id=$_GET['id'];
+        $where['role_id']=$id;
+        $count=$m->delete($id);
+		$data=$m2->where($where)->delete();//删除角色时，删除rms_right_role_tables该角色的相关记录
+        if($count !== false && $data !== false){
+            $this->success('数据删除成功','__APP__/User/Role/index');
+        }else if($count === false){
+            $this->error('删除角色失败');
+        }else if($data === false){
+			 $this->error('删除角色相关权限记录失败');
+		}
+    }
+    //显示添加页面
+    public function add(){
+        $this->display();
+    }
+    public function insert_database(){
+        session_start();
+        $id=$_POST['hidden'];
+        if($_SESSION['id']!=$id) {return;}
+        $data=array(
+            'role_name'=>$_POST['role_name']
+        );
+        $db=M('rms_role');
+        $res=$db->add($data);
+        //为该角色初始化对所有表的访问权限
+        $m=M('rms_tables');
+        $tables=$m->field('id')->select();
+        //遍历每一张表
+        if ( is_array($tables) ) {
+        	for ( $i = 0; $i < count($tables); $i++ ) {
+				$tmp=array(
+            		'role_id'=>$res,
+            		'table_id'=>$tables[$i]['id'],
+            		'right_id'=>'0001'//初始值为0表示只有查询权限
+        		);
+        		M('rms_right_role_tables')->add($tmp);
+			}
+		}
+        if($res){
+        	$ajaxData['info']='数据添加成功';
+        	$ajaxData['url']=U('__APP__/User/Role/index');
+        	$ajaxData['status']=1;
+        	$this->ajaxReturn($ajaxData,'JSON');
+        }else{
+        	$ajaxData['url']=U('__APP__/User/Role/add');
+			$ajaxData['info']='数据添加失败';
+			$ajaxData['status']=0;
+            $this->ajaxReturn($ajaxData,'JSON');
+        }
+    }
+}
+?>

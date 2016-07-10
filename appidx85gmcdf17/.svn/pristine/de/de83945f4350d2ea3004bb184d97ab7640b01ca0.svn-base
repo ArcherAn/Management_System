@@ -1,0 +1,64 @@
+<extend name="Myapp/Tpl/Public/model.html"/>
+<block name="title"><title>成品整理工序信息修改</title></block>
+<block name="diyStyle">
+	<style>
+		td#atr{width:10%;text-align:center;}
+		td#input{width:50%;}
+		div.table-responsive{margin-left:5%;margin-top:1%;}
+		caption {text-align:center;background-color:#E9E9E9;}
+	</style>
+</block>
+<block name="content">
+        <div class="table-responsive">
+            <form action="__APP__/Process/Process/updatesortout" method="post">
+                <table class="table table-striped table-bordered table-hover">
+                	<thead>
+            			<caption>成品整理工序信息修改</caption>
+            		</thead>
+                    <tr>
+                        <td id="atr">成品整理编号</td>
+                        <td id="input">
+                        	<input class="form-control" placeholder="如：20080101" type="text" name='sortoutid' value="<{$data.sortoutid}>"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td id="atr">指标1</td>
+                        <td id="input">
+                        	<input class="form-control" placeholder="如：**" type="text" name='index1' value="<{$data.index1}>"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td id="atr">指标2</td>
+                        <td id="input">
+                        	<input class="form-control" placeholder="如：**" type="text" name='index2' value="<{$data.index2}>"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td id="atr">指标3</td>
+                        <td id="input">
+                        	<input class="form-control" placeholder="如：35" type="text" name='index3' value="<{$data.index3}>"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td id="atr">指标4</td>
+                        <td id="input">
+                        	<input class="form-control" placeholder="如：" type="text" name='index4' value="<{$data.index4}>"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td id="atr">日期</td>
+                        <td id="input">
+                        	<input class="form-control" placeholder="如：***" type="text" name='date' value="<{$data.date}>" onClick="WdatePicker()"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td id="atr"></td>
+                        <td id="input">
+                        	<input type='hidden' name='id' value="<{$data.id}>"/>
+                        	<input class="btn btn-primary" type="submit" value="确认修改" onclick="return confirm('是否确认？')"/>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </block>

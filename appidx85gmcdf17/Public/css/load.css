@@ -1,0 +1,71 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+body{
+    height: 500px;
+    width: 1100px;
+    margin: 0px auto;
+
+
+}
+.top{
+    height: 100px;
+    width: 1100px;
+    margin-top: 30px ;
+    margin-left: 80px;
+
+}
+.down{
+    height: 400px;
+    width: 1100px;
+}
+.down_left{
+    margin-top:40px;
+    height: 248px;
+    width: 500px;
+    float: left;
+
+}
+.down_right{
+    margin-top:40px;
+    height: 248px;
+    width: 500px;
+    float: right;
+    margin-right: 20px;
+
+
+}
+#login{
+    padding-top: 70px;
+    padding-left: 85px;
+
+    border: 1px solid red;
+
+}
+
+#admin{
+    border:#7D91AB 1px solid;
+    width:260px;
+    height:30px;
+    background:url(../img/bbg.png) repeat-x;
+    line-height:30px;
+}
+#apassword{
+    border:#7D91AB 1px solid;
+    width:260px;
+    height:30px;
+    background:url(../img/bbg.png) repeat-x;
+    line-height:30px;
+}
+.submit{
+    font-family:"微软雅黑", "幼圆", "宋体";
+    font-size:16px;
+    color:#FFF;
+    width:101px;
+    height:38px;
+    background:url(../img/login_button.png) no-repeat ;
+    border:none;
+}
+
+

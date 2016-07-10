@@ -1,0 +1,22 @@
+<?php
+// 本类由系统自动生成，仅供测试用途
+class SuyuanAction extends Action {
+    function index(){
+		
+     $keywords = $_GET['keywords'];
+	 $m=new Model();
+	 $list= $m->table(array(
+                      'processfeed '=>'a',
+                      'produce-productinfo'=>'b' 
+                    )
+              )->where("b.feedid=a.feedid and (riceid='$keywords'  or finericeid='$keywords' or ricebranid='$keywords' or chaffid='$keywords')")
+			  ->field(array('b.riceid','b.feedid'=>'feedid','a.feedid'=>'afeedid','b.finericeid','b.chaffid','b.ricebranid','a.source','a.date'=>'adate','b.date'=>'bdate'))
+           ->select();  
+		var_dump($list)  ;
+		$this->assign('data1',$keywords);
+	 $this->assign('data',$list);// 赋值数据集
+     $this->display(); 
+    }
+
+}
+?>

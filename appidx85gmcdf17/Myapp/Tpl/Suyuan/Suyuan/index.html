@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html>
+<html>
+<head lang="zh-CN">
+    <meta charset="utf-8">
+    <title>加工溯源</title>
+	<style>
+	body,div,ul,li,h3,p{margin:0;padding:0;}
+	ul li{list-style:none;}
+	html{-webkit-text-size-adjust:none;-ms-text-size-adjust:none;}
+	.page {display:table;margin:10px auto;background: #F0F0F0;-moz-box-shadow: 0 5px 20px #CCCCCC;-webkit-box-shadow: 0 5px 20px #CCCCCC;box-shadow: 0 5px 20px #CCCCCC;}
+	.box {width:900px;margin:18px auto 0 auto; }
+	.event_list {width:850px;float:right;background:url('/Public/img/dian3.png') 139px 0 repeat-y;margin:10px 0 20px 0; }
+	.event_list h3 {margin:0 0 10px 132px;font-size:24px;font-family:Georgia;color:#0066ff;padding-left:25px;background:url('/fuwaproject3/Public/img/jian.png') 0 -45px no-repeat;height:38px;line-height:30px;font-style:italic; }
+	.event_list li {background:url('/Public/img/jian.png') 136px -80px no-repeat;}
+	.event_list li span {width:127px;text-align:right;display:block;float:left;margin-top:10px;}
+	.event_list li p { width:680px;margin-left:24px;display:inline-block;padding-left:10px;background:url('/Public/img/jian.png') -21px 0 no-repeat;line-height:25px;_float:left; }
+	.event_list li p span { width:650px;text-align:left;border-bottom:2px solid #DDD;padding:10px 15px;background:#FFF;margin:0; }
+	</style>
+</head>
+<body>
+
+<div>
+        <form action="__APP__/Suyuan/Suyuan/index" method="get">
+     
+          产品编号： <input name="keywords" type="text" placeholder="请输入产品批次号" style="width: 200px;height: 30px">
+                    <button type="submit" >查询</button>
+         </form>
+</div>
+<div>
+	<div class="page">
+		<div class="box">
+			<ul class="event_list">
+				<div>
+					<h3>粗加工</h3>
+					<li>
+						<span>清洗</span>
+						<p>
+							<span>清理编号：<{$clear.clearid}>，指标1：<{$clear.index1}>，指标2：<{$clear.index2}>，指标3：<{$clear.index3}>，指标4：<{$clear.index4}>，日期：<{$clear.date}></span>
+						</p>
+                    </li>
+					<li>
+						<span>垄谷</span>
+						<p>
+							<span>垄谷编号：<{$ridgevalley.ridgevalleyid}>，指标1：<{$ridgevalley.index1}>，指标2：<{$ridgevalley.index2}>，指标3：<{$ridgevalley.index3}>，指标4：<{$ridgevalley.index4}>，日期：<{$ridgevalley.date}></span>
+						</p>
+                    </li>
+					<li>
+						<span>碾米抛光</span>
+						<p>
+							<span>碾米抛光编号：<{$polishing.polishingid}>，指标1：<{$polishing.index1}>，指标2：<{$polishing.index2}>，指标3：<{$polishing.index3}>，指标4：<{$polishing.index4}>，日期：<{$polishing.date}></span>
+						</p>
+                    </li>
+					<li>
+					<span>整理</span>
+						<p>
+							<span>整理编号：<{$sortout.sortoutid}>，指标1：<{$sortout.index1}>，指标2：<{$sortout.index2}>，指标3：<{$sortout.index3}>，指标4：<{$sortout.index4}>，日期：<{$sortout.date}></span>
+						</p>
+                    </li>
+					
+					<li>
+					<span>进料与出产信息</span>
+						<p>
+						<volist name='data' id='vo'>
+							<span>进料编号：<{$vo.feedid}>，批次号：<{$vo.picihao}>，进料来源：<{$vo.source}>，进料日期：<{$vo.adate}>，出产日期：<{$vo.bdate}></span>
+						</volist>
+						</p>
+                    </li>
+				</div>
+			</ul>
+		</div>
+	</div>
+</div>
+</body>
+</html>

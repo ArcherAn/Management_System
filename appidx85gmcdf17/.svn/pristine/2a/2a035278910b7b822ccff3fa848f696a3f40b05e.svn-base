@@ -1,0 +1,117 @@
+﻿<extend name="Myapp/Tpl/Public/model.html"/>
+<block name="title"><title>人员信息添加</title></block>
+<block name="diyStyle">
+    <style>
+        div.table-responsive{margin-left:5%;margin-top:1%;}
+    </style>
+</block>
+<block name="content">
+    <div class="table-responsive">
+        <form action="__APP__/Warehouse/Worker/insert_database" method="post">
+            <table class="table table-bordered">
+                <tr style="height:45px">
+                    <td colspan="5" align="center" bgcolor="#E9E9E9">仓储人员信息添加表</td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="width: 150px;background-color:#E9E9E9">员工编号</td>
+                    <td ><input class="form-control" placeholder="如：20080101" style="width: 250px;height: 30px" id="workid" type="text"/></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color:#E9E9E9">姓名</td>
+                    <td><input class="form-control" placeholder="如：张三" style="width: 250px;height: 30px" id="name" type="text" /></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color:#E9E9E9">性别</td>
+                    <td><input class="form-control" placeholder="如：男" style="width: 250px;height: 30px" id="sex" type="text" /></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color:#E9E9E9">年龄</td>
+                    <td><input class="form-control" placeholder="如：35" style="width: 250px;height: 30px" id="age" type="text" /></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color: #E9E9E9">工龄</td>
+                    <td><input class="form-control" placeholder="如：4" style="width: 250px;height: 30px" id="workage" type="text" /></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color: #E9E9E9">岗位</td>
+                    <td><input class="form-control" placeholder="如：仓管员" style="width: 250px;height: 30px" id="post" type="text" /></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color: #E9E9E9">家庭住址</td>
+                    <td>
+                        <input class="form-control" placeholder="如：荆州市" style="width: 250px;height: 30px" id="address" type="text" />
+                    </td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color:#E9E9E9">联系电话</td>
+                    <td><input class="form-control" placeholder="如：13456544537" style="width: 250px;height: 30px" id="telephone" type="text"/></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color:#E9E9E9"></td>
+                    <td><input class="btn btn-primary" id="apply" type="submit" value="确认添加" /></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <script>
+        $(function() {
+            $("#apply").click(function(){
+                if(confirm('确认添加？')){
+                    var a=$('#workid').val();
+                    var b=$('#name').val();
+                    var c=$('#sex').val();
+                    var d=$('#age').val();
+                    var e=$('#workage').val();
+                    var f=$('#post').val();
+                    var g=$('#address').val();
+                    var h=$('#telephone').val();
+                    var url='__APP__/Plant/Worker/insert_database';
+                    if(a == ""){
+                        alert("请填写员工编号！");
+                        return false;}
+                    if(b == "") {
+                        alert("请填写姓名！");
+                        return false;}
+                    if(c == "") {
+                        alert("请填写性别！");
+                        return false;}
+                    if(d == "") {
+                        alert("请填写年龄！");
+                        return false;}
+                    if(e == "") {
+                        alert("请填写工龄！");
+                        return false;}
+                    if(f == ""){
+                        alert("请填写岗位！");
+                        return false;}
+                    if(g == ""){
+                        alert("请填写家庭住址！");
+                        return false;}
+                    if(h == ""){
+                        alert("请填写联系电话！");
+                        return false;}
+                    var data={
+                        workid:a,
+                        name:b,
+                        sex:c,
+                        age:d,
+                        workage:e,
+                        post:f,
+                        address:g,
+                        telephone:h,
+                        hidden:$('#hash').val()
+                    };
+                    $(this).attr("disabled",true);
+                    $(this).val("数据处理中.....");
+                    $.post(url,data,function(data){
+                        alert(data.info);
+                        window.location.href=data.url;
+                    });
+                    $(this).val("数据处理成功.....");
+                    return true;
+                }
+            });
+        });
+    </script>
+
+</block>

@@ -1,0 +1,145 @@
+<extend name="Myapp/Tpl/Public/model.html"/>
+<block name="title"><title>大棚土壤信息添加</title></block>
+<block name="diyStyle">
+    <style>
+        div.table-responsive{margin-left:5%;margin-top:1%;}
+    </style>
+</block>
+<block name="content">
+    <div class="table-responsive">
+        <form action="__APP__/Seedlings/Shed/insert_database_shedsoil" method="post">
+            <table class="table table-bordered">
+                <tr style="height:45px">
+                    <td colspan="5" align="center" bgcolor="#E9E9E9">大棚土壤信息添加</td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="width: 150px;background-color:#E9E9E9">大棚编号</td>
+                    <td ><input class="form-control" placeholder="如：1" style="width: 250px;height: 30px" id="shedid" type="text"/></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color:#E9E9E9">土温</td>
+                    <td><input class="form-control" placeholder="如：26" style="width: 250px;height: 30px" id="soiltemp" type="text" /></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color:#E9E9E9">土湿</td>
+                    <td><input class="form-control" placeholder="如：50%" style="width: 250px;height: 30px" id="soilhumidity" type="text" /></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color:#E9E9E9">PH值</td>
+                    <td><input class="form-control" placeholder="如：7.9" style="width: 250px;height: 30px" id="PH" type="text" /></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color: #E9E9E9">电堆</td>
+                    <td><input class="form-control" placeholder="如：" style="width: 250px;height: 30px" id="Electricpile" type="text" /></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color: #E9E9E9">矿物质1</td>
+                    <td><input class="form-control" placeholder="如：钾" style="width: 250px;height: 30px" id="minerals1" type="text" /></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color: #E9E9E9">矿物质2</td>
+                    <td>
+                        <input class="form-control" placeholder="如：钠" style="width: 250px;height: 30px" id="minerals2" type="text" />
+                    </td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color: #E9E9E9">矿物质3</td>
+                    <td><input class="form-control" placeholder="如：镁" style="width: 250px;height: 30px" id="minerals3" type="text" /></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color: #E9E9E9">测量日期</td>
+                    <td>
+                        <div class="form-group">
+                            <div class="input-group date form_date"data-date="" data-date-format="" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                                <input class="form-control" placeholder="如：2015-3-15" style="width: 250px;height: 30px" id="date" type="text"  readonly/>
+                                <span class="input-group-addon" style="float: left"><span class="glyphicon glyphicon-calendar"></span></span>
+                            </div>
+                            <input type="hidden" id="dtp_input2" value="" /><br/>
+                        </div>
+                    </td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color:#E9E9E9"></td>
+                    <td><input class="btn btn-primary" id="apply" type="submit" value="确认添加" /></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <script>
+        $(function() {
+            $("#apply").click(function(){
+                if(confirm('确认添加？')){
+                    var a=$('#shedid').val();
+                    var b=$('#soiltemp').val();
+                    var c=$('#soilhumidity').val();
+                    var d=$('#PH').val();
+                    var e=$('#Electricpile').val();
+                    var f=$('#minerals1').val();
+                    var g=$('#minerals2').val();
+                    var h=$('#minerals3').val();
+                    var i=$('#date').val();
+                    var url='__APP__/Seedlings/Shed/insert_database_shedsoil';
+                    if(a == ""){
+                        alert("请填写大棚编号！");
+                        return false;}
+                    if(b == "") {
+                        alert("请填写土温！");
+                        return false;}
+                    if(c == "") {
+                        alert("请填写土湿！");
+                        return false;}
+                    if(d == "") {
+                        alert("请填写PH值！");
+                        return false;}
+                    if(e == "") {
+                        alert("请填写电堆！");
+                        return false;}
+                    if(f == ""){
+                        alert("请填写矿物质1！");
+                        return false;}
+                    if(g == ""){
+                        alert("请填写矿物质2！");
+                        return false;}
+                    if(h == ""){
+                        alert("请填写矿物质3！");
+                        return false;}
+                    if(i == ""){
+                        alert("请填写测量日期！");
+                        return false;}
+                    var data={
+                        shedid:a,
+                        soiltemp:b,
+                        soilhumidity:c,
+                        PH:d,
+                        Electricpile:e,
+                        minerals1:f,
+                        minerals2:g,
+                        minerals3:h,
+                        date:i,
+                        hidden:$('#hash').val()
+                    };
+                    $(this).attr("disabled",true);
+                    $(this).val("数据处理中.....");
+                    $.post(url,data,function(data){
+                        alert(data.info);
+                        window.location.href=data.url;
+                    });
+                    $(this).val("数据处理成功.....");
+                    return true;
+                }
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        $('.form_date').datetimepicker({
+            language: 'zh-CN',
+            weekStart: 1,
+            todayBtn: 1,
+            autoclose: 1,
+            todayHighlight: 1,
+            startView: 2,
+            minView: 2,
+            forceParse: 0
+        });
+    </script>
+</block>

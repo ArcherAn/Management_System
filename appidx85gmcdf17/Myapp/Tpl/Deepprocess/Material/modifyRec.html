@@ -1,0 +1,65 @@
+<extend name="Myapp/Tpl/Public/model.html"/>
+<block name="title"><title>糕点配方信息修改（深加工）</title></block>
+<block name="diyStyle">
+	<style>
+		td#atr{width:10%;text-align:center;}
+		td#input{width:50%;}
+		div.table-responsive{margin-left:5%;margin-top:1%;}
+		caption {text-align:center;background-color:#E9E9E9;}
+	</style>
+</block>
+<block name="content">
+        <div class="table-responsive">
+            <form action="__APP__/Deepprocess/Material/updateRec" method="post">
+                <table class="table table-striped table-bordered table-hover">
+                	<thead>
+            			<caption>修改糕点配方信息</caption>
+            		</thead>
+            		<tbody>
+		                <tr>
+		                    <td id="atr">配方编号</td>
+		                    <td id="input">
+		                    	<input class="form-control" placeholder="如：1" id="recipeid" type="text" name='recipeid' value="<{$data.recipeid}>"/>
+		                    </td>
+		                </tr>
+		                <tr>
+		                    <td id="atr">产品名称</td>
+		                    <td id="input">
+		                    	<input class="form-control" placeholder="如：1" id="name" type="text" name='name' value="<{$data.name}>" />
+		                    </td>
+		                </tr>
+		                <tr>
+		                    <td id="atr">成分1</td>
+		                    <td id="input">
+		                    	<input class="form-control" placeholder="如：1" id="ingredients1" type="text" name='ingredients1' value="<{$data.ingredients1}>"/>
+		                    </td>
+		                </tr>
+		                <tr>
+		                    <td id="atr">成分2</td>
+		                    <td id="input">
+		                    	<input class="form-control" placeholder="如：1" id="ingredients2" type="text" name='ingredients2' value="<{$data.ingredients2}>"/>
+		                    </td>
+		                </tr>
+		                <tr>
+		                    <td id="atr">成分3</td>
+		                    <td id="input">
+		                    	<input class="form-control" placeholder="如：1" id="ingredients3" type="text" name='ingredients3' value="<{$data.ingredients3}>"/>
+		                    </td>
+		                </tr>
+		                <tr>
+		                    <td id="atr">成分4</td>
+		                    <td id="input">
+		                    	<input class="form-control" placeholder="如：1" id="ingredients4" type="text" name='ingredients4' value="<{$data.ingredients4}>"/>
+		                    </td>
+		                </tr>
+            		</tbody>
+            		<tfoot>
+	                    <tr>
+	                        <td id="atr"></td>
+	                        <td id="input"><input type='hidden' name='id' value="<{$data.id}>"/><input class="btn btn-primary" type="submit" value="确认修改" onclick="return confirm('是否确认？')"/></td>
+	                    </tr>
+            		</tfoot>
+                </table>
+            </form>
+        </div>
+    </block>

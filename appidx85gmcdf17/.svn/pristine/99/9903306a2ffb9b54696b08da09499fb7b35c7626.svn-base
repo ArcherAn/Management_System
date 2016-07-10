@@ -1,0 +1,35 @@
+<?php
+
+class TraceAction extends Action {
+	public function index(){
+		$batchid=$_GET['batchid'];
+		$where['batchid']=$batchid;
+		//外包信息
+    	$m=M('deepprocess-packageinfo');
+        $arr=$m->where($where)->find();
+        //注模信息
+        $m1=M('deepprocess-zhumo');
+        $arr1=$m1->where($where)->find();
+        //烘烤信息
+        $m2=M('deepprocess-hongkao');
+        $arr2=$m2->where($where)->find();
+        //脱模信息
+        $m3=M('deepprocess-tuomo');
+        $arr3=$m3->where($where)->find();
+        //冷却/灭菌信息
+        $m4=M('deepprocess-sterilization');
+        $arr4=$m4->where($where)->find();
+        //内包信息
+        $m5=M('deepprocess-neibao');
+        $arr5=$m5->where($where)->find();
+        
+        $this->assign('data',$arr);
+        $this->assign('data1',$arr1);
+        $this->assign('data2',$arr2);
+        $this->assign('data3',$arr3);
+        $this->assign('data4',$arr4);
+        $this->assign('data5',$arr5);
+        $this->display();
+	}
+}
+?>

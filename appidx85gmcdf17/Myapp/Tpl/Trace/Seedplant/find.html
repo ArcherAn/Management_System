@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-CN">
+    <meta charset="utf-8">
+    <title>育秧种植溯源</title>
+    <style>
+        body,div,ul,li,h3,p{margin:0;padding:0;}
+        ul li{list-style:none;}
+        html{-webkit-text-size-adjust:none;-ms-text-size-adjust:none;}
+        .page {display:table;margin:10px auto;background: #F0F0F0;-moz-box-shadow: 0 5px 20px #CCCCCC;-webkit-box-shadow: 0 5px 20px #CCCCCC;box-shadow: 0 5px 20px #CCCCCC;}
+        .box {width:1000px;margin:18px auto 0 auto; }
+        .event_list {width:950px;float:right;background:url('/Public/img/dian3.png') 139px 0 repeat-y;margin:10px 0 20px 0; }
+        .event_list h3 {margin:0 0 10px 132px;font-size:24px;font-family:Georgia;color:#0066ff;padding-left:25px;background:url('/Public/img/jian.png') 0 -45px no-repeat;height:38px;line-height:30px;font-style:italic; }
+        .event_list li {background:url('/Public/img/jian.png') 136px -80px no-repeat;}
+        .event_list li span {width:127px;text-align:right;display:block;float:left;margin-top:10px;}
+        .event_list li p { width:780px;margin-left:24px;display:inline-block;padding-left:10px;background:url('/Public/img/jian.png') -21px 0 no-repeat;line-height:25px;_float:left; }
+        .event_list li p span { width:750px;text-align:left;border-bottom:2px solid #DDD;padding:10px 15px;background:#FFF;margin:0; }
+    </style>
+</head>
+<body>
+<div>
+    <div class="page">
+        <div class="box">
+            <ul class="event_list">
+                <div>
+                    <h3>育秧种植溯源</h3>
+                    <li>
+                        <span>收割信息</span>
+                        <p>
+                            <span>农田编号：<{$data1.farmlandid}>号农田，收割编号：<{$data1.productionid}>，秧苗批次号：<{$data1.seedid}>，产量：<{$data1.production}>t，收获日期：<{$data1.harvestdate}>，负责人：<{$data1.head}></span>
+                        </p>
+                    </li>
+                    <li>
+                        <span>育秧信息</span>
+                        <p>
+                            <span>托盘批次号：<{$data2.trayid}>，育秧地点：<{$data2.place}>，秧苗批次号：<{$data2.seedingid}>，起始日期：<{$data2.startdate}>，结束日期：<{$data2.enddate}>，负责人：<{$data2.head}></span>
+                        </p>
+                    </li>
+                    <li>
+                        <span>暗化信息</span>
+                        <p>
+                            <span>托盘批次号：<{$data3.trayid}>，种子批次号：<{$data3.seedid}>，托盘数量：<{$data3.trayamount}>，暗化地点：<{$data3.traysite}>，起始日期：<{$data3.startdate}>，结束日期：<{$data3.enddate}>，负责人：<{$data3.head}></span>
+                        </p>
+                    </li>
+                    <li>
+                        <span>浸种信息</span>
+                        <p>
+                            <volist name="data4" id="vo">
+                            <span>种子批次号：<{$vo.seedid}>，药品批次号：<{$vo.drugid}>，药品浓度：<{$vo.concentration}>ml/l，起始日期：<{$vo.startdate}>，结束日期：<{$vo.enddate}>，负责人：<{$data3.head}></span>
+                            </volist>
+                        </p>
+                    </li>
+                </div>
+            </ul>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<extend name="Myapp/Tpl/Public/model.html"/>
+<block name="title"><title>农田土壤信息修改</title></block>
+<block name="content">
+    <div style="margin-top:1%">
+        <form action="__APP__/Plant/Farmland/updatesoil" method="post">
+            <table class="table table-bordered">
+                <tr style="height:45px">
+                    <td colspan="5" align="center" bgcolor="#E9E9E9">农田土壤信息修改</td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="width: 150px;background-color:#E9E9E9">土壤编号</td>
+                    <td ><input class="form-control" style="width: 250px;height: 30px" type="text" name='soilid'  value="<{$data.soilid}>"/></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color:#E9E9E9">土温</td>
+                    <td><input class="form-control"  style="width: 250px;height: 30px" type="text" name='soiltemp'value="<{$data.soiltemp}>"/></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color:#E9E9E9">土湿</td>
+                    <td><input class="form-control"  style="width: 250px;height: 30px" type="text" name='soilhumidity'  value="<{$data.soilhumidity}>"/></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color:#E9E9E9">PH值</td>
+                    <td><input class="form-control"  style="width: 250px;height: 30px" type="text" name='PH'  value="<{$data.PH}>"/></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color:#E9E9E9">N含量</td>
+                    <td><input class="form-control"  style="width: 250px;height: 30px" type="text" name='N'  value="<{$data.N}>"/></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color:#E9E9E9">其他指标</td>
+                    <td><input class="form-control"  style="width: 250px;height: 30px" type="text" name='others'  value="<{$data.others}>"/></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color:#E9E9E9">日期</td>
+                    <td><input class="form-control"  style="width: 250px;height: 30px" type="text" name='date'  value="<{$data.date}>" onClick="WdatePicker()"/></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color:#E9E9E9"></td>
+                    <td><input type='hidden' name='id' value="<{$data.id}>"/><input class="btn btn-primary" type="submit" value="确认修改" onclick="return confirm('是否确认？')"/></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</block>

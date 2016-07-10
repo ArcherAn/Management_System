@@ -1,0 +1,107 @@
+<extend name="Myapp/Tpl/Public/model.html"/>
+<block name="title"><title>农机需求信息添加</title></block>
+<block name="diyStyle">
+    <style>
+        div.table-responsive{margin-left:5%;margin-top:1%;}
+    </style>
+</block>
+<block name="content">
+    <div class="table-responsive">
+        <form action="__APP__/Plant/Demand/insert_database_plantdemand" method="post">
+            <table class="table table-bordered">
+                <tr style="height:45px">
+                    <td colspan="5" align="center" bgcolor="#E9E9E9">农机需求信息添加</td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="width: 150px;background-color:#E9E9E9">工作类型</td>
+                    <td ><input class="form-control" placeholder="如：插秧" style="width: 250px;height: 30px" id="worktype" type="text" /></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color:#E9E9E9">地点</td>
+                    <td><input class="form-control" placeholder="如：1号农田" style="width: 250px;height: 30px" id="site" type="text" /></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color:#E9E9E9">面积</td>
+                    <td><input class="form-control" placeholder="如：10" style="width: 250px;height: 30px" id="area" type="text" /></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color:#E9E9E9">时间</td>
+                    <td><input class="form-control" placeholder="如：2" style="width: 250px;height: 30px" id="timelong" type="text"/></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color: #E9E9E9">起始日期</td>
+                    <td>
+                        <div class="form-group">
+                            <div class="input-group date form_date"data-date="" data-date-format="" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                                <input class="form-control" placeholder="如：2015-3-15" style="width: 250px;height: 30px" id="starttime" type="text" readonly/>
+                                <span class="input-group-addon" style="float: left"><span class="glyphicon glyphicon-calendar"></span></span>
+                            </div>
+                            <input type="hidden" id="dtp_input2" value="" /><br/>
+                        </div>
+                    </td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color:#E9E9E9"></td>
+                    <td><input class="btn btn-primary" id="apply" type="submit" value="确认添加"/></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <script>
+        $(function() {
+            $("#apply").click(function(){
+                if(confirm('确认添加？')){
+                    var a=$('#worktype').val();
+                    var b=$('#site').val();
+                    var c=$('#area').val();
+                    var d=$('#timelong').val();
+                    var e=$('#starttime').val();
+                    var url='__APP__/Plant/Demand/insert_database_plantdemand';
+                    if(a == ""){
+                        alert("请填写工作类型！");
+                        return false;}
+                    if(b == "") {
+                        alert("请填写地点！");
+                        return false;}
+                    if(c == "") {
+                        alert("请填写面积！");
+                        return false;}
+                    if(d == "") {
+                        alert("请填写时间！");
+                        return false;}
+                    if(e == "") {
+                        alert("请填写起始日期！");
+                        return false;}
+                    var data={
+                        worktype:a,
+                        site:b,
+                        area:c,
+                        timelong:d,
+                        starttime:e,
+                        hidden:$('#hash').val()
+                    };
+                    $(this).attr("disabled",true);
+                    $(this).val("数据处理中.....");
+                    $.post(url,data,function(data){
+                        alert(data.info);
+                        window.location.href=data.url;
+                    });
+                    $(this).val("数据处理成功.....");
+                    return true;
+                }
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        $('.form_date').datetimepicker({
+            language: 'zh-CN',
+            weekStart: 1,
+            todayBtn: 1,
+            autoclose: 1,
+            todayHighlight: 1,
+            startView: 2,
+            minView: 2,
+            forceParse: 0
+        });
+    </script>
+</block>

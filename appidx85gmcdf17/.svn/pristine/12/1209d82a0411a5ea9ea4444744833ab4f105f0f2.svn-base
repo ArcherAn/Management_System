@@ -1,0 +1,356 @@
+<extend name="Myapp/Tpl/Public/model.html" />
+<block name="title">
+<title>首页</title>
+</block>
+<block name="diyStyle">
+<style>
+table, th, td {
+	border: 0px solid blue;
+	text-align: center;
+}
+
+table {
+	margin-top: 2%;
+	width: 100%;
+}
+
+td {
+	padding-top: 0;
+	padding-right: 0;
+	padding-bottom: 0;
+	padding-left: 0;
+	font-size: 1em;
+}
+
+.chart-legend ul {
+	list-style: none;
+	width: 50%;
+	margin: 0 auto;
+}
+
+.chart-legend li {
+	text-indent: 0px;
+	line-height: 24px;
+	position: relative;
+	font-weight: 200;
+	display: block;
+	float: left;
+	width: 50%;
+	font-size: 0.8em;
+}
+
+.chart-legend  li:before {
+	display: block;
+	width: 10px;
+	height: 16px;
+	position: absolute;
+	left: 0;
+	top: 3px;
+	content: "";
+}
+
+.t1:before {
+	background-color: #c62f29;
+}
+
+.t2:before {
+	background-color: #0033CC;
+}
+
+caption {
+	text-align: center;
+}
+</style>
+<script src="/Public/js/Chart.min.js"></script> <script>
+	$(document).ready(
+			function() {
+				var options = {
+					scaleOverride : false, //是否显示折线图的线条  
+					scaleShowLabels : true,//是否显示纵轴  
+					scaleShowGridLines : true,//是否显示坐标轴的标尺  
+					bezierCurve : true,//是否显示圆滑的效果  
+					pointDot : true,//是否显示折线图的顶点  
+					pointDotRadius : 2,//折线图定点大小  
+					pointDotStrokeWidth : 1,//折线图定点外围大小  
+					animation : true,//是否显示动画效果  
+					animationSteps : 60,//图形显示的速度  
+				};
+				var data1 = {
+					labels : [ "1", "2", "3", "4", "5", "6", "7" ],
+					datasets : [
+							{
+								fillColor : "rgba(198,47,41,0.4)",
+								strokeColor : "rgba(198,47,41,1)",
+								pointColor : "rgba(220,220,220,1)",
+								pointStrokeColor : "#000",
+								data : [ <{$temperature1[6]['temperature']}>,
+										<{$temperature1[5]['temperature']}>,
+										<{$temperature1[4]['temperature']}>,
+										<{$temperature1[3]['temperature']}>,
+										<{$temperature1[2]['temperature']}>,
+										<{$temperature1[1]['temperature']}>,
+										<{$temperature1[0]['temperature']}> ]
+							},
+							{
+								fillColor : "rgba(0,51,204,0.4)",
+								strokeColor : "rgba(0,51,204,1)",
+								pointColor : "rgba(220,220,220,1)",
+								pointStrokeColor : "#000",
+								data : [ <{$temperature2[6]['temperature']}>,
+										<{$temperature2[5]['temperature']}>,
+										<{$temperature2[4]['temperature']}>,
+										<{$temperature2[3]['temperature']}>,
+										<{$temperature2[2]['temperature']}>,
+										<{$temperature2[1]['temperature']}>,
+										<{$temperature2[0]['temperature']}> ]
+							}, ]
+				}
+				var data2 = {
+					labels : [ "1", "2", "3", "4", "5", "6", "7" ],
+					datasets : [
+							{
+								fillColor : "rgba(198,47,41,0.4)",
+								strokeColor : "rgba(198,47,41,1)",
+								pointColor : "rgba(220,220,220,1)",
+								pointStrokeColor : "#000",
+								data : [ <{$humidity1[6]['humidity']}>,
+										<{$humidity1[5]['humidity']}>,
+										<{$humidity1[4]['humidity']}>,
+										<{$humidity1[3]['humidity']}>,
+										<{$humidity1[2]['humidity']}>,
+										<{$humidity1[1]['humidity']}>,
+										<{$humidity1[0]['humidity']}> ]
+							},
+							{
+								fillColor : "rgba(0,51,204,0.4)",
+								strokeColor : "rgba(0,51,204,1)",
+								pointColor : "rgba(220,220,220,1)",
+								pointStrokeColor : "#000",
+								data : [ <{$humidity2[6]['humidity']}>,
+										<{$humidity2[5]['humidity']}>,
+										<{$humidity2[4]['humidity']}>,
+										<{$humidity2[3]['humidity']}>,
+										<{$humidity2[2]['humidity']}>,
+										<{$humidity2[1]['humidity']}>,
+										<{$humidity2[0]['humidity']}> ]
+							}, ]
+				}
+				var data3 = {
+					labels : [ "1", "2", "3", "4", "5", "6", "7" ],
+					datasets : [
+							{
+								fillColor : "rgba(198,47,41,0.4)",
+								strokeColor : "rgba(198,47,41,1)",
+								pointColor : "rgba(220,220,220,1)",
+								pointStrokeColor : "#000",
+								data : [ <{$dewPoint1[6]['dewPoint']}>,
+										<{$dewPoint1[5]['dewPoint']}>,
+										<{$dewPoint1[4]['dewPoint']}>,
+										<{$dewPoint1[3]['dewPoint']}>,
+										<{$dewPoint1[2]['dewPoint']}>,
+										<{$dewPoint1[1]['dewPoint']}>,
+										<{$dewPoint1[0]['dewPoint']}> ]
+							},
+							{
+								fillColor : "rgba(0,51,204,0.4)",
+								strokeColor : "rgba(0,51,204,1)",
+								pointColor : "rgba(220,220,220,1)",
+								pointStrokeColor : "#000",
+								data : [ <{$dewPoint2[6]['dewPoint']}>,
+										<{$dewPoint2[5]['dewPoint']}>,
+										<{$dewPoint2[4]['dewPoint']}>,
+										<{$dewPoint2[3]['dewPoint']}>,
+										<{$dewPoint2[2]['dewPoint']}>,
+										<{$dewPoint2[1]['dewPoint']}>,
+										<{$dewPoint2[0]['dewPoint']}> ]
+							}, ]
+				}
+				var data4 = {
+					labels : [ "1", "2", "3", "4", "5", "6", "7" ],
+					datasets : [
+							{
+								fillColor : "rgba(198,47,41,0.4)",
+								strokeColor : "rgba(198,47,41,1)",
+								pointColor : "rgba(220,220,220,1)",
+								pointStrokeColor : "#000",
+								data : [ <{$solarRadiation1[6]['solarRadiation']}>,
+										<{$solarRadiation1[5]['solarRadiation']}>,
+										<{$solarRadiation1[4]['solarRadiation']}>,
+										<{$solarRadiation1[3]['solarRadiation']}>,
+										<{$solarRadiation1[2]['solarRadiation']}>,
+										<{$solarRadiation1[1]['solarRadiation']}>,
+										<{$solarRadiation1[0]['solarRadiation']}> ]
+							},
+							{
+								fillColor : "rgba(0,51,204,0.4)",
+								strokeColor : "rgba(0,51,204,1)",
+								pointColor : "rgba(220,220,220,1)",
+								pointStrokeColor : "#000",
+								data : [ <{$solarRadiation2[6]['solarRadiation']}>,
+										<{$solarRadiation2[5]['solarRadiation']}>,
+										<{$solarRadiation2[4]['solarRadiation']}>,
+										<{$solarRadiation2[3]['solarRadiation']}>,
+										<{$solarRadiation2[2]['solarRadiation']}>,
+										<{$solarRadiation2[1]['solarRadiation']}>,
+										<{$solarRadiation2[0]['solarRadiation']}> ]
+							}, ]
+				}
+				var data5 = {
+					labels : [ "1", "2", "3", "4", "5", "6", "7" ],
+					datasets : [
+							{
+								fillColor : "rgba(198,47,41,0.4)",
+								strokeColor : "rgba(198,47,41,1)",
+								pointColor : "rgba(220,220,220,1)",
+								pointStrokeColor : "#000",
+								data : [ <{$leafWetness1[6]['leafWetness']}>,
+										<{$leafWetness1[5]['leafWetness']}>,
+										<{$leafWetness1[4]['leafWetness']}>,
+										<{$leafWetness1[3]['leafWetness']}>,
+										<{$leafWetness1[2]['leafWetness']}>,
+										<{$leafWetness1[1]['leafWetness']}>,
+										<{$leafWetness1[0]['leafWetness']}> ]
+							},
+							{
+								fillColor : "rgba(0,51,204,0.4)",
+								strokeColor : "rgba(0,51,204,1)",
+								pointColor : "rgba(220,220,220,1)",
+								pointStrokeColor : "#000",
+								data : [ <{$leafWetness2[6]['leafWetness']}>,
+										<{$leafWetness2[5]['leafWetness']}>,
+										<{$leafWetness2[4]['leafWetness']}>,
+										<{$leafWetness2[3]['leafWetness']}>,
+										<{$leafWetness2[2]['leafWetness']}>,
+										<{$leafWetness2[1]['leafWetness']}>,
+										<{$leafWetness2[0]['leafWetness']}> ]
+							}, ]
+				}
+				var data6 = {
+					labels : [ "1", "2", "3", "4", "5", "6", "7" ],
+					datasets : [
+							{
+								fillColor : "rgba(198,47,41,0.4)",
+								strokeColor : "rgba(198,47,41,1)",
+								pointColor : "rgba(220,220,220,1)",
+								pointStrokeColor : "#000",
+								data : [ <{$soilWaterContent1[6]['soilWaterContent']}>,
+										<{$soilWaterContent1[5]['soilWaterContent']}>,
+										<{$soilWaterContent1[4]['soilWaterContent']}>,
+										<{$soilWaterContent1[3]['soilWaterContent']}>,
+										<{$soilWaterContent1[2]['soilWaterContent']}>,
+										<{$soilWaterContent1[1]['soilWaterContent']}>,
+										<{$soilWaterContent1[0]['soilWaterContent']}> ]
+							},
+							{
+								fillColor : "rgba(0,51,204,0.4)",
+								strokeColor : "rgba(0,51,204,1)",
+								pointColor : "rgba(220,220,220,1)",
+								pointStrokeColor : "#000",
+								data : [ <{$soilWaterContent2[6]['soilWaterContent']}>,
+										<{$soilWaterContent2[5]['soilWaterContent']}>,
+										<{$soilWaterContent2[4]['soilWaterContent']}>,
+										<{$soilWaterContent2[3]['soilWaterContent']}>,
+										<{$soilWaterContent2[2]['soilWaterContent']}>,
+										<{$soilWaterContent2[1]['soilWaterContent']}>,
+										<{$soilWaterContent2[0]['soilWaterContent']}> ]
+							}, ]
+				}
+				var canvas = document.getElementById("Chart1");
+				var ctx = canvas.getContext("2d");
+				new Chart(ctx).Line(data1, options);
+				canvas = document.getElementById("Chart2");
+				ctx = canvas.getContext("2d");
+				new Chart(ctx).Line(data2, options);
+				canvas = document.getElementById("Chart3");
+				ctx = canvas.getContext("2d");
+				new Chart(ctx).Line(data3, options);
+				canvas = document.getElementById("Chart4");
+				ctx = canvas.getContext("2d");
+				new Chart(ctx).Line(data4, options);
+				canvas = document.getElementById("Chart5");
+				ctx = canvas.getContext("2d");
+				new Chart(ctx).Line(data5, options);
+				canvas = document.getElementById("Chart6");
+				ctx = canvas.getContext("2d");
+				new Chart(ctx).Line(data6, options);
+			});
+</script> </block>
+<block name="content">
+<div class="table-responsive">
+	<table>
+		<caption>实时数据</caption>
+		<tr>
+			<td>温度</td>
+			<td>湿度</td>
+		</tr>
+		<tr>
+			<td>
+				<canvas id="Chart1" width="400"></canvas>
+				<div class="chart-legend">
+					<ul>
+						<li class="t1">一号种植田</li>
+						<li class="t2">二号种植田</li>
+					</ul>
+				</div>
+			</td>
+			<td>
+				<canvas id="Chart2" width="400"></canvas>
+				<div class="chart-legend">
+					<ul>
+						<li class="t1">一号种植田</li>
+						<li class="t2">二号种植田</li>
+					</ul>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>露点</td>
+			<td>太阳辐射</td>
+		</tr>
+		<tr>
+			<td>
+				<canvas id="Chart3" width="400"></canvas>
+				<div class="chart-legend">
+					<ul>
+						<li class="t1">一号种植田</li>
+						<li class="t2">二号种植田</li>
+					</ul>
+				</div>
+			</td>
+			<td>
+				<canvas id="Chart4" width="400"></canvas>
+				<div class="chart-legend">
+					<ul>
+						<li class="t1">一号种植田</li>
+						<li class="t2">二号种植田</li>
+					</ul>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>叶片湿度</td>
+			<td>土壤含水量</td>
+		</tr>
+		<tr>
+			<td>
+				<canvas id="Chart5" width="400"></canvas>
+				<div class="chart-legend">
+					<ul>
+						<li class="t1">一号种植田</li>
+						<li class="t2">二号种植田</li>
+					</ul>
+				</div>
+			</td>
+			<td>
+				<canvas id="Chart6" width="400"></canvas>
+				<div class="chart-legend">
+					<ul>
+						<li class="t1">一号种植田</li>
+						<li class="t2">二号种植田</li>
+					</ul>
+				</div>
+			</td>
+		</tr>
+	</table>
+</div>
+</block>

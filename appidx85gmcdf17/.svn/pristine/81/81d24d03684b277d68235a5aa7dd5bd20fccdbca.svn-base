@@ -1,0 +1,56 @@
+<extend name="Myapp/Tpl/Public/model.html"/>
+<block name="title"><title>水信息</title></block>
+<block name="content">
+    <script>
+        function jump(){
+            window.location="__APP__/Seedlings/Shed/addwaterinfo";
+        }
+    </script>
+    <div>
+        <div style="height: 50px">
+            <span style="margin-top: 5px;font-size: 28px">阅读器管理</span><span style="font-size: 14px;margin-top: 3px;">&nbsp;育秧管理平台</span>
+        </div>
+        <div style="background-color: #b1bab7;height: 30px">
+            <span style="margin-top: 5px;float: left">主页&nbsp;>&nbsp;育秧&nbsp;>&nbsp;大棚管理</span>
+        </div>
+        <div  style="margin-top: 10px;">
+            <form action="__APP__/Seedlings/Shed/waterinfo" method="get">
+                <span style="font-size: 16px;float: left">水编号：</span>
+                <span style="float: left;margin-left: 10px"><input name="waterid" type="text" placeholder="请输入要搜索的水编号" class="form-control"style="width: 200px;height: 30px"></span>
+                <span><button type="submit" class="btn btn-primary btn-sm" style="float: left;margin-left: 10px;">查询</button></span>
+                <span><button type="button" class="btn btn-success btn-sm" style="float: left;margin-left: 10px" onclick="jump()">新增信息</button></span>
+            </form>
+        </div>
+        <div>
+            <table  class="table table-striped table-bordered" style="margin-top: 50px;align:center;">
+                <thead>
+                <tr>
+                    <th>水编号</th>
+                    <th>绝对湿度</th>
+                    <th>相对湿度</th>
+                    <th>指标1</th>
+                    <th>指标2</th>
+                    <th>日期</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <volist name='data' id='vo'>
+                    <tr>
+                        <td><{$vo.waterid}></td>
+                        <td><{$vo.absolutehumidity}></td>
+                        <td><{$vo.relativehumidity}></td>
+                        <td><{$vo.indicators1}></td>
+                        <td><{$vo.indicators2}></td>
+                        <td><{$vo.date}></td>
+                        <td><a href="__APP__/Seedlings/Shed/modifywaterinfo/id/<{$vo.id}>">修改</a>|
+                            <a href="__APP__/Seedlings/Shed/deletewaterinfo/id/<{$vo.id}>"onclick="return confirm('是否删除？')">删除</a>
+                        </td>
+                    </tr>
+                </volist>
+                </tbody>
+            </table>
+        </div>
+        <div align="center"><{$page}></div>
+    </div>
+</block>

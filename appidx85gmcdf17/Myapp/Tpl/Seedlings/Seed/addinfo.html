@@ -1,0 +1,151 @@
+<extend name="Myapp/Tpl/Public/model.html"/>
+<block name="title"><title>种子信息添加</title></block>
+<block name="diyStyle">
+    <style>
+        div.table-responsive{margin-left:5%;margin-top:1%;}
+    </style>
+</block>
+<block name="content">
+    <div class="table-responsive">
+        <form action="__APP__/Seedlings/Seed/insert_database_info" method="post">
+            <table class="table table-bordered">
+                <tr style="height:45px">
+                    <td colspan="5" align="center" bgcolor="#E9E9E9">种子信息添加</td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="width: 150px;background-color:#E9E9E9">种子批次号</td>
+                    <td ><input class="form-control" placeholder="如：0001" style="width: 250px;height: 30px" id="seedid" type="text"/></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color:#E9E9E9">品种</td>
+                    <td><input class="form-control" placeholder="如：AU52" style="width: 250px;height: 30px" id="varieties" type="text" /></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color:#E9E9E9">类型</td>
+                    <td><input class="form-control" placeholder="如：粳米" style="width: 250px;height: 30px" id="type" type="text" /></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color:#E9E9E9">重量</td>
+                    <td><input class="form-control" placeholder="如：100" style="width: 250px;height: 30px" id="weight" type="text" /></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color: #E9E9E9">单价</td>
+                    <td><input class="form-control" placeholder="如：10" style="width: 250px;height: 30px" id="price" type="text" /></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color: #E9E9E9">来源</td>
+                    <td><input class="form-control" placeholder="如：**种子站" style="width: 250px;height: 30px" id="source" type="text" /></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color: #E9E9E9">采购员</td>
+                    <td><input class="form-control" placeholder="如：张三" style="width: 250px;height: 30px" id="worker" type="text" /></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color: #E9E9E9">购进日期</td>
+                    <td>
+                        <div class="form-group">
+                            <div class="input-group date form_date"data-date="" data-date-format="" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                                <input class="form-control" placeholder="如：2015-3-15" style="width: 250px;height: 30px" id="buydate" type="text"  readonly/>
+                                <span class="input-group-addon" style="float: left"><span class="glyphicon glyphicon-calendar"></span></span>
+                            </div>
+                            <input type="hidden" id="dtp_input1" value="" /><br/>
+                        </div>
+                    </td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color: #E9E9E9">种子生产日期</td>
+                    <td>
+                        <div class="form-group">
+                            <div class="input-group date form_date"data-date="" data-date-format="" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                                <input class="form-control" placeholder="如：2015-3-15" style="width: 250px;height: 30px" id="Seedproductiondate" type="text"  readonly/>
+                                <span class="input-group-addon" style="float: left"><span class="glyphicon glyphicon-calendar"></span></span>
+                            </div>
+                            <input type="hidden" id="dtp_input2" value="" /><br/>
+                        </div>
+                    </td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color:#E9E9E9"></td>
+                    <td><input class="btn btn-primary" id="apply" type="submit" value="确认添加" /></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <script>
+        $(function() {
+            $("#apply").click(function(){
+                if(confirm('确认添加？')){
+                    var a=$('#seedid').val();
+                    var b=$('#varieties').val();
+                    var c=$('#type').val();
+                    var d=$('#weight').val();
+                    var e=$('#price').val();
+                    var f=$('#source').val();
+                    var g=$('#worker').val();
+                    var h=$('#buydate').val();
+                    var i=$('#Seedproductiondate').val();
+                    var url='__APP__/Seedlings/Seed/insert_database_info';
+                    if(a == ""){
+                        alert("请填写种子批次号！");
+                        return false;}
+                    if(b == "") {
+                        alert("请填写品种！");
+                        return false;}
+                    if(c == "") {
+                        alert("请填写类型！");
+                        return false;}
+                    if(d == "") {
+                        alert("请填写重量！");
+                        return false;}
+                    if(e == "") {
+                        alert("请填写单价！");
+                        return false;}
+                    if(f== ""){
+                        alert("请填写来源！");
+                        return false;}
+                    if(g== ""){
+                        alert("请填写采购员！");
+                        return false;}
+                    if(h== ""){
+                        alert("请填写购进日期！");
+                        return false;}
+                    if(i== ""){
+                        alert("请填写种子生产日期！");
+                        return false;}
+                    var data={
+                        seedid:a,
+                        varieties:b,
+                        type:c,
+                        weight:d,
+                        price:e,
+                        source:f,
+                        worker:g,
+                        buydate:h,
+                        Seedproductiondate:i,
+                        hidden:$('#hash').val()
+                    };
+                    $(this).attr("disabled",true);
+                    $(this).val("数据处理中.....");
+                    $.post(url,data,function(data){
+                        alert(data.info);
+                        window.location.href=data.url;
+                    });
+                    $(this).val("数据处理成功.....");
+                    return true;
+                }
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        $('.form_date').datetimepicker({
+            language: 'zh-CN',
+            weekStart: 1,
+            todayBtn: 1,
+            autoclose: 1,
+            todayHighlight: 1,
+            startView: 2,
+            minView: 2,
+            forceParse: 0
+        });
+    </script>
+</block>

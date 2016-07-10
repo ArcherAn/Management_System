@@ -1,0 +1,49 @@
+﻿<extend name="Myapp/Tpl/Public/model.html"/>
+<block name="title"><title>溯源信息</title></block>
+<block name="content">
+
+<div>
+        <form action="__APP__/Suyuan/Suyuan/index" method="get">
+     
+          大米编号： <input name="keywords" type="text" placeholder="请输入产品批次号" style="width: 200px;height: 30px">
+                    <button type="submit" >查询</button>
+         </form>
+</div>
+
+<div>
+                <table  class="table table-striped table-bordered" style="margin-top: 50px;align:center;">
+                    <thead>
+                    <tr>
+                        <th>产品编号</th>
+						<th>进料编号</th>
+						<th>出产大米编号</th>
+						<th>出产细米编号</th>
+						<th>出产米糠编号</th>
+						<th>出产谷壳编号</th>
+						<th>进料来源</th>
+						<th>进料日期</th>
+				        <th>出产日期</th>
+                    </tr>
+                    </thead>
+					
+                    <tbody>
+                    <volist name='data' id='vo'>
+                        <tr>
+                            <td><{$data1}></td>
+                            <td><{$vo.feedid}></td>
+                            <td><{$vo.riceid}></td>
+							<td><{$vo.finericeid}></td>
+							<td><{$vo.ricebranid}></td>
+							<td><{$vo.chaffid}></td>							
+                            <td><{$vo.source}></td>
+                            <td><{$vo.adate}></td>
+                            <td><{$vo.bdate}></td>							
+                        </tr>
+                    </volist>
+                    </tbody>
+					
+                </table>
+</div>
+
+
+</block>

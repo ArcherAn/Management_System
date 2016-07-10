@@ -1,0 +1,116 @@
+<extend name="Myapp/Tpl/Public/model.html"/>
+<block name="title"><title>温度信息添加</title></block>
+<block name="diyStyle">
+    <style>
+        div.table-responsive{margin-left:5%;margin-top:1%;}
+    </style>
+</block>
+<block name="content">
+    <div class="table-responsive">
+        <form action="__APP__/Seedlings/Shed/insert_database_tempinfo" method="post">
+            <table class="table table-bordered">
+                <tr style="height:45px">
+                    <td colspan="5" align="center" bgcolor="#E9E9E9">温度信息添加</td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="width: 150px;background-color:#E9E9E9">温度编号</td>
+                    <td ><input class="form-control" placeholder="如：001" style="width: 250px;height: 30px" id="tempid" type="text"/></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color:#E9E9E9">最高温度</td>
+                    <td><input class="form-control" placeholder="如：36" style="width: 250px;height: 30px" id="highesttemp" type="text" /></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color:#E9E9E9">最低温度</td>
+                    <td><input class="form-control" placeholder="如：33" style="width: 250px;height: 30px" id="lowesttemp" type="text" /></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color:#E9E9E9">平均温度</td>
+                    <td><input class="form-control" placeholder="如：34" style="width: 250px;height: 30px" id="averagetemp" type="text" /></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color: #E9E9E9">累计温度</td>
+                    <td><input class="form-control" placeholder="如：" style="width: 250px;height: 30px" id="cumulativetemp" type="text" /></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color: #E9E9E9">日期</td>
+                    <td>
+                        <div class="form-group">
+                            <div class="input-group date form_date"data-date="" data-date-format="" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                                <input class="form-control" placeholder="如：2015-3-15" style="width: 250px;height: 30px" id="date" type="text"  readonly/>
+                                <span class="input-group-addon" style="float: left"><span class="glyphicon glyphicon-calendar"></span></span>
+                            </div>
+                            <input type="hidden" id="dtp_input2" value="" /><br/>
+                        </div>
+                    </td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color:#E9E9E9"></td>
+                    <td><input class="btn btn-primary" id="apply" type="submit" value="确认添加" /></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <script>
+        $(function() {
+            $("#apply").click(function(){
+                if(confirm('确认添加？')){
+                    var a=$('#tempid').val();
+                    var b=$('#highesttemp').val();
+                    var c=$('#lowesttemp').val();
+                    var d=$('#averagetemp').val();
+                    var e=$('#cumulativetemp').val();
+                    var f=$('#date').val();
+                    var url='__APP__/Seedlings/Shed/insert_database_tempinfo';
+                    if(a == ""){
+                        alert("请填写温度编号！");
+                        return false;}
+                    if(b == "") {
+                        alert("请填写最高温度！");
+                        return false;}
+                    if(c == "") {
+                        alert("请填写最低温度！");
+                        return false;}
+                    if(d == "") {
+                        alert("请填写平均温度！");
+                        return false;}
+                    if(e == "") {
+                        alert("请填写累计温度！");
+                        return false;}
+                    if(f== ""){
+                        alert("请填写日期！");
+                        return false;}
+                    var data={
+                        tempid:a,
+                        highesttemp:b,
+                        lowesttemp:c,
+                        averagetemp:d,
+                        cumulativetemp:e,
+                        date:f,
+                        hidden:$('#hash').val()
+                    };
+                    $(this).attr("disabled",true);
+                    $(this).val("数据处理中.....");
+                    $.post(url,data,function(data){
+                        alert(data.info);
+                        window.location.href=data.url;
+                    });
+                    $(this).val("数据处理成功.....");
+                    return true;
+                }
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        $('.form_date').datetimepicker({
+            language: 'zh-CN',
+            weekStart: 1,
+            todayBtn: 1,
+            autoclose: 1,
+            todayHighlight: 1,
+            startView: 2,
+            minView: 2,
+            forceParse: 0
+        });
+    </script>
+</block>

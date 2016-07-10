@@ -1,0 +1,93 @@
+<extend name="Myapp/Tpl/Public/model.html"/>
+<block name="title"><title>装箱信息添加（深加工）</title></block>
+<block name="diyStyle">
+	<style>
+		td#atr{width:10%;text-align:center;}
+		td#input{width:50%;}
+		div.table-responsive{margin-left:5%;margin-top:1%;}
+		caption {text-align:center;background-color:#E9E9E9;}
+	</style>
+</block>
+    <block name="content">
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered table-hover">
+            	<thead>
+            		<caption>添加装箱信息记录</caption>
+            	</thead>
+            	<tbody>
+	                <tr>
+	                    <td id="atr">批次</td>
+	                    <td id="input">
+	                    	<input class="form-control" placeholder="如：1" id="batchid" type="text"/>
+	                    </td>
+	                </tr>
+	                <tr>
+	                    <td id="atr">数量</td>
+	                    <td id="input">
+	                    	<input class="form-control" placeholder="如：180箱" id="amount" type="text"/>
+	                    </td>
+	                </tr>
+	                <tr>
+	                    <td id="atr">流向</td>
+	                    <td id="input">
+	                    	<input class="form-control" placeholder="如：1号仓库" id="whereabouts" type="text"/>
+	                    </td>
+	                </tr>
+	                <tr>
+	                    <td id="atr">日期</td>
+	                    <td id="input">
+	                    	<input class="form-control" id="date" type="text" onClick="WdatePicker()"/>
+	                    </td>
+	                </tr>
+            	</tbody>
+            	<tfoot>
+	      			<tr>
+	                    <td id="atr"></td>
+	                    <td id="input">
+	                    	<input class="btn btn-primary" id="apply" type="submit" value="确认添加" />
+	                    </td>
+	                </tr>
+            	</tfoot>
+            </table>
+        </div>
+        <script>
+        $(function() {
+                $("#apply").click(function(){
+                	if(confirm('确认添加？')){
+	                    var a=$('#batchid').val();
+	                    var b=$('#amount').val();
+	                    var c=$('#whereabouts').val();
+	                    var d=$('#date').val();
+	                    var url='__APP__/Deepprocess/Outer/insert_database_packing';
+	                    if(a == ""){
+	                        alert("请填写批次！");
+	                        return false;}
+	                    if(b == "") {
+	                        alert("请填写数量！");
+	                        return false;}
+	                    if(c == "") {
+	                        alert("请填写流向！");
+	                        return false;}
+	                    if(d == ""){
+	                        alert("请填写日期！");
+	                        return false;}
+	                    var data={
+	                    	batchid:a,
+	                    	amount:b,
+	                    	whereabouts:c,
+	                    	date:d,
+	                        hidden:$('#hash').val()
+	                    };
+	                    $(this).attr("disabled",true);
+	                    $(this).val("数据处理中.....");
+	                    $.post(url,data,function(data){
+	                        alert(data.info);
+	                        window.location.href=data.url;
+	                    });
+	                    $(this).val("数据处理成功.....");
+	                    return true;
+                	}
+                });
+            });
+        </script>
+    </block>

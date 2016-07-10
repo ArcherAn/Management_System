@@ -1,0 +1,77 @@
+<extend name="Myapp/Tpl/Public/model.html"/>
+<block name="title"><title>秧苗长势信息修改</title></block>
+<block name="content">
+    <div style="margin-top:1%">
+        <form action="__APP__/Plant/Planting/updatezhangshi" method="post">
+            <table class="table table-bordered" style="border: 1px solid red">
+                <tr style="height:45px">
+                    <td colspan="5" align="center" bgcolor="#E9E9E9">秧苗长势信息修改</td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="width: 150px;background-color:#E9E9E9">秧苗批次号</td>
+                    <td ><input class="form-control" style="width: 250px;height: 30px" type="text" name='seedingid'  value="<{$data.seedingid}>"/></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color:#E9E9E9">长势</td>
+                    <td><input class="form-control"  style="width: 250px;height: 30px" type="text" name='potential'value="<{$data.potential}>"/></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color:#E9E9E9">密度</td>
+                    <td><input class="form-control"  style="width: 250px;height: 30px" type="text" name='density'  value="<{$data.density}>"/></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color:#E9E9E9">株高</td>
+                    <td><input class="form-control"  style="width: 250px;height: 30px" type="text" name='high'  value="<{$data.high}>"/></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color: #E9E9E9">叶片数</td>
+                    <td><input class="form-control"  style="width: 250px;height: 30px" type="text" name='leafnumber'  value="<{$data.leafnumber}>"/></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color: #E9E9E9">叶片长度</td>
+                    <td><input class="form-control"  style="width: 250px;height: 30px" type="text" name='leaflength'  value="<{$data.leaflength}>"/></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color: #E9E9E9">叶片宽度</td>
+                    <td><input class="form-control"  style="width: 250px;height: 30px" type="text" name='leafwidth'  value="<{$data.leafwidth}>"/></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color: #E9E9E9">叶色情况</td>
+                    <td><input class="form-control"  style="width: 250px;height: 30px" type="text" name='leafcolor'  value="<{$data.leafcolor}>"/></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color: #E9E9E9">叶厚</td>
+                    <td><input class="form-control"  style="width: 250px;height: 30px" type="text" name='leafthickness'  value="<{$data.leafthickness}>"/></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color: #E9E9E9">生物量</td>
+                    <td><input class="form-control"  style="width: 250px;height: 30px" type="text" name='biomass'  value="<{$data.biomass}>"/></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color: #E9E9E9">虫害</td>
+                    <td><input class="form-control"  style="width: 250px;height: 30px" type="text" name='insectpests'  value="<{$data.insectpests}>"/></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color: #E9E9E9">日期</td>
+                    <td><input class="form-control"  style="width: 250px;height: 30px" type="text" name='date'  value="<{$data.date}>" onClick="WdatePicker()"/></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color:#E9E9E9"></td>
+                    <td><input type='hidden' name='id' value="<{$data.id}>"/><input class="btn btn-primary" type="submit" value="确认修改" onclick="return confirm('是否确认？')"/></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <script type="text/javascript">
+        $('.form_date').datetimepicker({
+            language: 'zh-CN',
+            weekStart: 1,
+            todayBtn: 1,
+            autoclose: 1,
+            todayHighlight: 1,
+            startView: 2,
+            minView: 2,
+            forceParse: 0
+        });
+    </script>
+</block>

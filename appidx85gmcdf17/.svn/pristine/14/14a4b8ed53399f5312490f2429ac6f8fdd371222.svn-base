@@ -1,0 +1,62 @@
+﻿<extend name="Myapp/Tpl/Public/model.html"/>
+<block name="title"><title>入库粮食信息</title></block>
+<block name="content">
+    <script>
+        function jump(){
+            window.location="__APP__/Warehouse/Warehousein/addput";
+        }
+    </script>
+    <div>
+        <div style="height: 50px">
+            <span style="margin-top: 5px;font-size: 28px">阅读器管理</span><span style="font-size: 14px;margin-top: 3px;">&nbsp;仓储管理平台</span>
+        </div>
+        <div style="background-color: #b1bab7;height: 30px">
+            <span style="margin-top: 5px;float: left">主页&nbsp;>&nbsp;仓储&nbsp;>&nbsp;入库管理&nbsp>&nbsp;粮食入库信息</span>
+        </div>
+        <div  style="margin-top: 10px;">
+            <form action="__APP__/Warehouse/Warehousein/put" method="get">
+                <span style="font-size: 16px;float: left">入库编号：</span>
+                <span style="float: left;margin-left: 10px"><input name="shedid" type="text" placeholder="请输入要搜索的入库编号" class="form-control"style="width: 200px;height: 30px"></span>
+                <span><button type="submit" class="btn btn-primary btn-sm" style="float: left;margin-left: 10px;">查询</button></span>
+                <span><button type="button" class="btn btn-success btn-sm" style="float: left;margin-left: 10px" onclick="jump()">新增信息</button></span>
+            </form>
+        </div>
+        <div>
+            <table  class="table table-striped table-bordered" style="margin-top: 50px;align:center;">
+                <thead>
+                <tr>
+                    <th>入库编号</th>
+                    <th>品种</th>
+                    <th>类型</th>
+                    <th>批次</th>
+                    <th>重量</th>
+                    <th>来源</th>
+                    <th>仓库号</th>
+		    <th>入库日期</th>
+		    <th>仓管员</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <volist name='data' id='vo'>
+                    <tr>
+                        <td><{$vo.putid}>号</td>
+                        <td><{$vo.breed}></td>
+                        <td><{$vo.type}></td>
+                        <td><{$vo.batch}></td>
+                        <td><{$vo.weight}></td>
+                        <td><{$vo.source}></td>
+                        <td><{$vo.warehouseid}></td>
+                        <td><{$vo.putdate}></td>
+                        <td><{$vo.admin}></td>
+                        <td><a href="__APP__/Warehouse/Warehousein/modifyput/id/<{$vo.id}>">修改</a>|
+                            <a href="__APP__/Warehouse/Warehousein/deleteput/id/<{$vo.id}>"onclick="return confirm('是否删除？')">删除</a>
+                        </td>
+                    </tr>
+                </volist>
+                </tbody>
+            </table>
+        </div>
+        <div align="center"><{$page}></div>
+    </div>
+</block>

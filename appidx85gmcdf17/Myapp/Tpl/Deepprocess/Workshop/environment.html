@@ -1,0 +1,83 @@
+<extend name="Myapp/Tpl/Public/model.html" />
+<block name="title">
+<title>深加工车间环境信息</title>
+</block>
+<block name="content">
+<script>
+document.getElementById('shengjiagong').click();
+</script>
+<script>
+	function jump(){
+	    window.location="__APP__/Deepprocess/Workshop/addEnv";
+	}
+</script>
+<div>
+	<div style="height: 50px">
+		<span style="margin-top: 5px; font-size: 28px">深加工管理平台</span>
+	</div>
+	<div style="background-color: #b1bab7; height: 30px">
+		<span style="margin-top: 5px; float: left">主页&nbsp;>&nbsp;深加工&nbsp;>&nbsp;车间管理</span>
+	</div>
+	<div style="margin-top: 10px;">
+		<form action="__APP__/Deepprocess/Workshop/environment" method="get">
+			<?php 
+				if(substr($right,3,1)=='1'){
+					echo '<span style="font-size: 16px; float: left">车间名称：</span>'
+						.'<span style="float: left; margin-left: 10px">'
+						.'<input name="name" type="text" placeholder="请输入要搜索的车间名称" class="form-control" style="width: 200px; height: 30px"></span>';
+					echo '<span><button type="submit" class="btn btn-primary btn-sm" style="float: left; margin-left: 10px;">查询</button></span>';
+				}
+			?>
+			<?php 
+				if(substr($right,0,1)=='1'){
+					echo '<span><button type="button" class="btn btn-success btn-sm" style="float: left; margin-left: 10px" onclick="jump()">新增记录</button></span>';
+				}
+			?>
+		</form>
+	</div>
+	<div>
+		<table class="table table-striped table-bordered" style="margin-top: 50px; align: center;">
+			<thead>
+				<tr>
+					<th>车间编号</th>
+					<th>车间名称</th>
+					<th>温度</th>
+					<th>湿度</th>
+					<th>细菌级别</th>
+					<th>指标一</th>
+					<th>日期</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				<volist name='data' id='vo'>
+					<tr>
+						<td><{$vo.workshopid}></td>
+						<td><{$vo.name}></td>
+						<td><{$vo.temp}></td>
+						<td><{$vo.humidity}></td>
+						<td><{$vo.level}></td>
+						<td><{$vo.index1}></td>
+						<td><{$vo.date}></td>
+						<td>
+							<?php 
+								if(substr($right,2,1)=='1'){
+									echo '<a href="__APP__/Deepprocess/Workshop/modifyEnv/id/'.$vo['id'].'">修改</a>';
+									if(substr($right,1,1)=='1'){
+										echo " | <a href=\"__APP__/Deepprocess/Workshop/deleteEnv/id/".$vo['id']."\" onclick=\"return confirm('是否删除？')\">删除</a>";
+									}
+								}else if(substr($right,1,1)=='1'){
+									echo "<a href=\"__APP__/Deepprocess/Workshop/deleteEnv/id/".$vo['id']."\" onclick=\"return confirm('是否删除？')\">删除</a>";
+								}else{
+									echo '没有操作权限';
+								}
+							?>
+						</td>
+					</tr>
+				</volist>
+			</tbody>
+		</table>
+	</div>
+	<div align="center">[<{$page}>]</div>
+</div>
+</block>

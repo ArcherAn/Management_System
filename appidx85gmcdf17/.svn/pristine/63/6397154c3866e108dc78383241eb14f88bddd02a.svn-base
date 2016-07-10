@@ -1,0 +1,49 @@
+<extend name="Myapp/Tpl/Public/model.html"/>
+<block name="title"><title>人员信息修改</title></block>
+<block name="content">
+        <div style="margin-top:1%">
+            <form action="__APP__/Warehouse/Worker/update" method="post">
+                <table class="table table-bordered" style="border: 1px solid red">
+                    <tr style="height:45px">
+                        <td colspan="5" align="center" bgcolor="#E9E9E9">仓储人员信息修改</td>
+                    </tr>
+                    <tr style="height:45px">
+                        <td style="width: 150px;background-color:#E9E9E9">员工编号</td>
+                        <td ><input class="form-control" placeholder="如：20080101" style="width: 250px;height: 30px" type="text" name='workid'  value="<{$data.workid}>"/></td>
+                    </tr>
+                    <tr style="height:45px">
+                        <td style="background-color:#E9E9E9">姓名</td>
+                        <td><input class="form-control" placeholder="如：张三" style="width: 250px;height: 30px" type="text" name='name'value="<{$data.name}>"/></td>
+                    </tr>
+                    <tr style="height:45px">
+                        <td style="background-color:#E9E9E9">性别</td>
+                        <td><input class="form-control" placeholder="如：男" style="width: 250px;height: 30px" type="text" name='sex'  value="<{$data.sex}>"/></td>
+                    </tr>
+                    <tr style="height:45px">
+                        <td style="background-color:#E9E9E9">年龄</td>
+                        <td><input class="form-control" placeholder="如：35" style="width: 250px;height: 30px" type="text" name='age'  value="<{$data.age}>"/></td>
+                    </tr>
+                    <tr style="height:45px">
+                        <td style="background-color: #E9E9E9">工龄</td>
+                        <td><input class="form-control" placeholder="如：4" style="width: 250px;height: 30px" type="text" name='workage'  value="<{$data.workage}>"/></td>
+                    </tr>
+                    <tr style="height:45px">
+                        <td style="background-color: #E9E9E9">岗位</td>
+                        <td><input class="form-control" placeholder="如：育秧员" style="width: 250px;height: 30px" type="text" name='post'  value="<{$data.post}>"/></td>
+                    </tr>
+                    <tr style="height:45px">
+                        <td style="background-color: #E9E9E9">家庭住址</td>
+                        <td><input class="form-control" placeholder="如：荆州市" style="width: 250px;height: 30px" type="text" name='address'  value="<{$data.address}>"/></td>
+                    </tr>
+                    <tr style="height:45px">
+                        <td style="background-color:#E9E9E9">联系电话</td>
+                        <td><input class="form-control" placeholder="如：13456544537" style="width: 250px;height: 30px" type="text" name='telephone'  value="<{$data.telephone}>"/></td>
+                    </tr>
+                    <tr style="height:45px">
+                        <td style="background-color:#E9E9E9"></td>
+                        <td><input type='hidden' name='id' value="<{$data.id}>"/><input class="btn btn-primary" type="submit" value="确认修改" onclick="return confirm('是否确认？')"/></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </block>

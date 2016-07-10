@@ -1,0 +1,116 @@
+<extend name="Myapp/Tpl/Public/model.html"/>
+<block name="title"><title>大棚室内环境信息添加</title></block>
+<block name="diyStyle">
+    <style>
+        div.table-responsive{margin-left:5%;margin-top:1%;}
+    </style>
+</block>
+<block name="content">
+    <div class="table-responsive">
+        <form action="__APP__/Seedlings/Shed/insert_database_shedindoor" method="post">
+            <table class="table table-bordered">
+                <tr style="height:45px">
+                    <td colspan="5" align="center" bgcolor="#E9E9E9">大棚室内环境信息添加</td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="width: 150px;background-color:#E9E9E9">大棚编号</td>
+                    <td ><input class="form-control" placeholder="如：1" style="width: 250px;height: 30px" id="shedid" type="text"/></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color:#E9E9E9">光编号</td>
+                    <td><input class="form-control" placeholder="如：001" style="width: 250px;height: 30px" id="lightid" type="text" /></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color:#E9E9E9">温度编号</td>
+                    <td><input class="form-control" placeholder="如：001" style="width: 250px;height: 30px" id="tempid" type="text" /></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color:#E9E9E9">水编号</td>
+                    <td><input class="form-control" placeholder="如：001" style="width: 250px;height: 30px" id="waterid" type="text" /></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color: #E9E9E9">气编号</td>
+                    <td><input class="form-control" placeholder="如：001" style="width: 250px;height: 30px" id="gasid" type="text" /></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color: #E9E9E9">日期</td>
+                    <td>
+                        <div class="form-group">
+                            <div class="input-group date form_date"data-date="" data-date-format="" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                                <input class="form-control" placeholder="如：2015-3-15" style="width: 250px;height: 30px" id="date" type="text"  readonly/>
+                                <span class="input-group-addon" style="float: left"><span class="glyphicon glyphicon-calendar"></span></span>
+                            </div>
+                            <input type="hidden" id="dtp_input2" value="" /><br/>
+                        </div>
+                    </td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color:#E9E9E9"></td>
+                    <td><input class="btn btn-primary" id="apply" type="submit" value="确认添加" /></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <script>
+        $(function() {
+            $("#apply").click(function(){
+                if(confirm('确认添加？')){
+                    var a=$('#shedid').val();
+                    var b=$('#lightid').val();
+                    var c=$('#tempid').val();
+                    var d=$('#waterid').val();
+                    var e=$('#gasid').val();
+                    var f=$('#date').val();
+                    var url='__APP__/Seedlings/Shed/insert_database_shedindoor';
+                    if(a == ""){
+                        alert("请填写大棚编号！");
+                        return false;}
+                    if(b == "") {
+                        alert("请填写光编号！");
+                        return false;}
+                    if(c == "") {
+                        alert("请填写温度编号！");
+                        return false;}
+                    if(d == "") {
+                        alert("请填写P水编号！");
+                        return false;}
+                    if(e == "") {
+                        alert("请填写气编号！");
+                        return false;}
+                    if(f== ""){
+                        alert("请填写日期！");
+                        return false;}
+                    var data={
+                        shedid:a,
+                        lightid:b,
+                        tempid:c,
+                        waterid:d,
+                        gasid:e,
+                        date:f,
+                        hidden:$('#hash').val()
+                    };
+                    $(this).attr("disabled",true);
+                    $(this).val("数据处理中.....");
+                    $.post(url,data,function(data){
+                        alert(data.info);
+                        window.location.href=data.url;
+                    });
+                    $(this).val("数据处理成功.....");
+                    return true;
+                }
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        $('.form_date').datetimepicker({
+            language: 'zh-CN',
+            weekStart: 1,
+            todayBtn: 1,
+            autoclose: 1,
+            todayHighlight: 1,
+            startView: 2,
+            minView: 2,
+            forceParse: 0
+        });
+    </script>
+</block>

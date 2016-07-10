@@ -1,0 +1,71 @@
+<extend name="Myapp/Tpl/Public/model.html"/>
+<block name="title"><title>进料信息修改</title></block>
+<block name="diyStyle">
+	<style>
+		td#atr{width:10%;text-align:center;}
+		td#input{width:50%;}
+		div.table-responsive{margin-left:5%;margin-top:1%;}
+		caption {text-align:center;background-color:#E9E9E9;}
+	</style>
+</block>
+<block name="content">
+        <div class="table-responsive">
+            <form action="__APP__/Process/Feed/update" method="post">
+                <table class="table table-striped table-bordered table-hover">
+                	<thead>
+            			<caption>加工进料信息修改</caption>
+            		</thead>
+                    <tr>
+                        <td id="atr">进料编号</td>
+                        <td id="input">
+                        	<input class="form-control" placeholder="如：20080101" type="text" name='feedid' value="<{$data.feedid}>"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td id="atr">品种</td>
+                        <td id="input">
+                        	<input class="form-control" placeholder="如：ZD34" type="text" name='breed' value="<{$data.breed}>"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td id="atr">类型</td>
+                        <td id="input">
+                        	<input class="form-control" placeholder="如：早稻" type="text" name='type' value="<{$data.type}>"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td id="atr">重量</td>
+                        <td id="input">
+                        	<input class="form-control" placeholder="如：35" type="text" name='weight' value="<{$data.weight}>"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td id="atr">来源</td>
+                        <td id="input">
+                        	<input class="form-control" placeholder="如：一号仓库" type="text" name='source' value="<{$data.source}>"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td id="atr">操作员</td>
+                        <td id="input">
+                        	<input class="form-control" placeholder="如：张三" type="text" name='operator' value="<{$data.operator}>"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td id="atr">日期</td>
+                        <td id="input">
+                        	<input class="form-control" placeholder="如：20110101" type="text" name='date' value="<{$data.date}>"/>
+                        </td>
+                    </tr>
+                  
+                    <tr>
+                        <td id="atr"></td>
+                        <td id="input">
+                        	<input type='hidden' name='id' value="<{$data.id}>"/>
+                        	<input class="btn btn-primary" type="submit" value="确认修改" onclick="return confirm('是否确认？')"/>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </block>

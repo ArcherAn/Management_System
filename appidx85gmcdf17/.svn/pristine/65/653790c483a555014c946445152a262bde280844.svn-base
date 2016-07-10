@@ -1,0 +1,115 @@
+<extend name="Myapp/Tpl/Public/model.html"/>
+<block name="title"><title>设备维护信息添加（深加工）</title></block>
+<block name="diyStyle">
+	<style>
+		td#atr{width:10%;text-align:center;}
+		td#input{width:50%;}
+		div.table-responsive{margin-left:5%;margin-top:1%;}
+		caption {text-align:center;background-color:#E9E9E9;}
+	</style>
+</block>
+    <block name="content">
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered table-hover">
+            	<thead>
+            		<caption>设备维护信息添加</caption>
+            	</thead>
+            	<tbody>
+	                <tr>
+	                    <td id="atr">机器编号</td>
+	                    <td id="input">
+	                    	<input class="form-control" placeholder="如：20080101" id="machineid" type="text"/>
+	                    </td>
+	                </tr>
+	                <tr>
+	                    <td id="atr">设备名称</td>
+	                    <td id="input">
+	                    	<input class="form-control" placeholder="如：内包传送带" id="name" type="text"/>
+	                    </td>
+	                </tr>
+	                <tr>
+	                    <td id="atr">维护周期</td>
+	                    <td id="input">
+	                    	<input class="form-control" placeholder="如：12h" id="cycle" type="text"/>
+	                    </td>
+	                </tr>
+	                <tr>
+	                    <td id="atr">维护原因</td>
+	                    <td id="input">
+	                    	<input class="form-control" placeholder="如：清洗" id="reason" type="text"/>
+	                    </td>
+	                </tr>
+	                <tr>
+	                    <td id="atr">维护员</td>
+	                    <td id="input">
+	                    	<input class="form-control" placeholder="如：张三" id="operator" type="text"/>
+	                    </td>
+	                </tr>
+	                <tr>
+	                    <td id="atr">日期</td>
+	                    <td id="input">
+	                    	<input class="form-control" placeholder="如：2014-02-02" id="date" type="text"/>
+	                    </td>
+	                </tr>
+            	</tbody>
+            	<tfoot>
+	      			<tr>
+	                    <td id="atr"></td>
+	                    <td id="input">
+	                    	<input class="btn btn-primary" id="apply" type="submit" value="确认添加" />
+	                    </td>
+	                </tr>
+            	</tfoot>
+            </table>
+        </div>
+        <script>
+        $(function() {
+                $("#apply").click(function(){
+                	if(confirm('确认添加？')){
+	                    var a=$('#machineid').val();
+	                    var b=$('#name').val();
+	                    var c=$('#cycle').val();
+	                    var d=$('#reason').val();
+	                    var e=$('#operator').val();
+	                    var f=$('#date').val();
+	                    var url='__APP__/Deepprocess/Equip/insert_maintenance_db';
+	                    if(a == ""){
+	                        alert("请填写机器编号！");
+	                        return false;}
+	                    if(b == "") {
+	                        alert("请填写设备名称！");
+	                        return false;}
+	                    if(c == "") {
+	                        alert("请填写维护周期！");
+	                        return false;}
+	                    if(d == "") {
+	                        alert("请填写维护原因！");
+	                        return false;}
+	                    if(e == "") {
+	                        alert("请填写维护员！");
+	                        return false;}
+	                    if(f == ""){
+	                        alert("请填写日期！");
+	                        return false;}
+	                    var data={
+	                    	machineid:a,
+	                        name:b,
+	                        cycle:c,
+	                        reason:d,
+	                        operator:e,
+	                        date:f,
+	                        hidden:$('#hash').val()
+	                    };
+	                    $(this).attr("disabled",true);
+	                    $(this).val("数据处理中.....");
+	                    $.post(url,data,function(data){
+	                        alert(data.info);
+	                        window.location.href=data.url;
+	                    });
+	                    $(this).val("数据处理成功.....");
+	                    return true;
+                	}
+                });
+            });
+        </script>
+    </block>

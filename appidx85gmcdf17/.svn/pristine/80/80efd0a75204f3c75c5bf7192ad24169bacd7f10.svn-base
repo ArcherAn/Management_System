@@ -1,0 +1,96 @@
+<extend name="Myapp/Tpl/Public/model.html"/>
+<block name="title"><title>种子质量信息添加</title></block>
+<block name="diyStyle">
+    <style>
+        div.table-responsive{margin-left:5%;margin-top:1%;}
+    </style>
+</block>
+<block name="content">
+    <div class="table-responsive">
+        <form action="__APP__/Seedlings/Seed/insert_database_qualityinfo" method="post">
+            <table class="table table-bordered">
+                <tr style="height:45px">
+                    <td colspan="5" align="center" bgcolor="#E9E9E9">种子质量信息添加</td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="width: 150px;background-color:#E9E9E9">种子批次号</td>
+                    <td ><input class="form-control" placeholder="如：0001" style="width: 250px;height: 30px" id="seedid" type="text"/></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color:#E9E9E9">发芽率</td>
+                    <td><input class="form-control" placeholder="如：" style="width: 250px;height: 30px" id="germinationrate" type="text" /></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color:#E9E9E9">发芽指数</td>
+                    <td><input class="form-control" placeholder="如：" style="width: 250px;height: 30px" id="germinationindex" type="text" /></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color:#E9E9E9">发芽势</td>
+                    <td><input class="form-control" placeholder="如：" style="width: 250px;height: 30px" id="germinationpotential" type="text" /></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color: #E9E9E9">千粒重</td>
+                    <td><input class="form-control" placeholder="如：" style="width: 250px;height: 30px" id="weight" type="text" /></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color: #E9E9E9">指标</td>
+                    <td><input class="form-control" placeholder="如：" style="width: 250px;height: 30px" id="indicators" type="text" /></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color:#E9E9E9"></td>
+                    <td><input class="btn btn-primary" id="apply" type="submit" value="确认添加" /></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <script>
+        $(function() {
+            $("#apply").click(function(){
+                if(confirm('确认添加？')){
+                    var a=$('#seedid').val();
+                    var b=$('#germinationrate').val();
+                    var c=$('#germinationindex').val();
+                    var d=$('#germinationpotential').val();
+                    var e=$('#weight').val();
+                    var f=$('#indicators').val();
+                    var url='__APP__/Seedlings/Seed/insert_database_qualityinfo';
+                    if(a == ""){
+                        alert("请填写种子批次号！");
+                        return false;}
+                    if(b == "") {
+                        alert("请填写发芽率！");
+                        return false;}
+                    if(c == "") {
+                        alert("请填写发芽指数！");
+                        return false;}
+                    if(d == "") {
+                        alert("请填写发芽势！");
+                        return false;}
+                    if(e == "") {
+                        alert("请填写千粒重！");
+                        return false;}
+                    if(f== ""){
+                        alert("请填写指标！");
+                        return false;}
+                    var data={
+                        seedid:a,
+                        germinationrate:b,
+                        germinationindex:c,
+                        germinationpotential:d,
+                        weight:e,
+                        indicators:f,
+                        hidden:$('#hash').val()
+                    };
+                    $(this).attr("disabled",true);
+                    $(this).val("数据处理中.....");
+                    $.post(url,data,function(data){
+                        alert(data.info);
+                        window.location.href=data.url;
+                    });
+                    $(this).val("数据处理成功.....");
+                    return true;
+                }
+            });
+        });
+    </script>
+</block>

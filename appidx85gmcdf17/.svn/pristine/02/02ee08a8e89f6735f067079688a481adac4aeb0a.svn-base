@@ -1,0 +1,74 @@
+<extend name="Myapp/Tpl/Public/model.html" />
+<block name="title">
+<title>出产产品信息</title>
+</block>
+<block name="content">
+<script>
+	function jump(){
+	    window.location="__APP__/Process/Produce/addproduct";
+	}
+</script>
+<div>
+	<div style="height: 50px">
+		<span style="margin-top: 5px; font-size: 28px">阅读器管理</span><span
+			style="font-size: 14px; margin-top: 3px;">&nbsp;加工管理平台</span>
+	</div>
+	<div style="background-color: #b1bab7; height: 30px">
+		<span style="margin-top: 5px; float: left">主页&nbsp;>&nbsp;加工&nbsp;>&nbsp;出产管理&nbsp;>&nbsp;产品信息</span>
+	</div>
+	<div style="margin-top: 10px;">
+		<form action="__APP__/Process/Produce/product" method="get">
+			<span style="font-size: 20px; float: left">大米编号：</span>
+			<span style="float: left; margin-left: 10px">
+			<input name="riceid" type="text" placeholder="请输入要搜索" class="form-control"
+				style="width: 200px; height: 30px"></span>
+			<span><button type="submit" class="btn btn-primary btn-sm"
+					style="float: left; margin-left: 10px;">查询</button></span>
+			<span><button type="button" class="btn btn-success btn-sm"
+					style="float: left; margin-left: 10px" onclick="jump()">新增信息</button></span>
+		</form>
+	</div>
+	<div>
+		<table class="table table-striped table-bordered" style="margin-top: 50px;align:center;">
+			<thead>
+				<tr>
+				    <th>进料编号</th>
+					<th>大米编号</th>
+					<th>细米编号</th>
+					<th>米糠编号</th>
+					<th>谷壳编号</th>
+					<th>能耗</th>
+					<th>操作员</th>
+					<th>日期</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				<volist name='data' id='vo'>
+				<tr>
+				    <td><{$vo.feedid}></td>
+					<td><{$vo.riceid}><?php 
+				echo '<a href="'.U('Suyuan/Suyuan/index','keywords='.$vo['riceid'],'','',true).'"><img src="'.C('QR_CODE_URL').U('Suyuan/Suyuan/index','keywords='.$vo['riceid'],'','',true).'"/></a>';
+							?></td>
+					<td><{$vo.finericeid}><?php 
+				echo '<a href="'.U('Suyuan/Suyuan/index','keywords='.$vo['finericeid'],'','',true).'"><img src="'.C('QR_CODE_URL').U('Suyuan/Suyuan/index','keywords='.$vo['finericeid'],'','',true).'"/></a>';
+							?></td>
+					<td><{$vo.ricebranid}><?php 
+				echo '<a href="'.U('Suyuan/Suyuan/index','keywords='.$vo['ricebranid'],'','',true).'"><img src="'.C('QR_CODE_URL').U('Suyuan/Suyuan/index','keywords='.$vo['ricebranid'],'','',true).'"/></a>';
+							?></td>
+					<td><{$vo.chaffid}><?php 
+				echo '<a href="'.U('Suyuan/Suyuan/index','keywords='.$vo['chaffid'],'','',true).'"><img src="'.C('QR_CODE_URL').U('Suyuan/Suyuan/index','keywords='.$vo['chaffid'],'','',true).'"/></a>';
+							?></td>
+					<td><{$vo.consumption}></td>
+					<td><{$vo.operator}></td>
+					<td><{$vo.date}></td>
+					<td><a href="__APP__/Process/Produce/modifyproduct/id/<{$vo.id}>">修改</a> |
+						<a href="__APP__/Process/Produce/deleteproduct/id/<{$vo.id}>" onclick="return confirm('确认删除？');">删除</a></td>
+				</tr>
+				</volist>
+			</tbody>
+		</table>
+	</div>
+	<div align="center">[<{$page}>]</div>
+</div>
+</block>

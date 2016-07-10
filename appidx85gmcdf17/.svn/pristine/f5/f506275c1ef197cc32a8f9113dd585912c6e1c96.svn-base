@@ -1,0 +1,43 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: Administrator
+ * Date: 2015/3/30
+ * Time: 9:07
+ */
+    class LoadAction extends Action{
+        function verify_load(){
+            $this->display("Load/admin");
+            exit;
+        }
+        /*
+         * 验证用户登录
+         */
+
+        function verify(){
+            $db=D("admin");
+            $where=array("id"=>$_POST['id'],"psw"=>md5($_POST['password']));
+            $data=$db->where($where)->find();
+            session_start();
+            if($data){
+                if($_SESSION['verify'] != md5($_POST['code'])) {
+                    $this->error('验证码错误！');
+                    $this->redirect("/Load/verify_load",'Fail',2);
+                }else {
+                    $_SESSION['load'] = 1;
+                    $_SESSION['user'] = $data['name'];//将登录成功的用户名放入session
+                    $_SESSION['userid'] = $data['id'];
+                    $this->redirect("/Load/show", "", 0);
+                }
+            }else{
+                $_SESSION['load']=0;
+                $this->redirect("/Load/verify_load",'Fail',2);
+            }
+        }
+
+		public function logout() {
+			session('user',null);
+			$this->redirect('/Load/verify_load');//登出后重定向到登录页面
+		}
+    }
+?>

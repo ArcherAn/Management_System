@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-CN">
+    <meta charset="utf-8">
+    <title>溯源</title>
+	<style>
+	body,div,ul,li,h3,p{margin:0;padding:0;}
+	ul li{list-style:none;}
+	html{-webkit-text-size-adjust:none;-ms-text-size-adjust:none;}
+	.page {display:table;margin:10px auto;background: #F0F0F0;-moz-box-shadow: 0 5px 20px #CCCCCC;-webkit-box-shadow: 0 5px 20px #CCCCCC;box-shadow: 0 5px 20px #CCCCCC;}
+	.box {width:900px;margin:18px auto 0 auto; }
+	.event_list {width:850px;float:right;background:url('/Public/img/dian3.png') 139px 0 repeat-y;margin:10px 0 20px 0; }
+	.event_list h3 {margin:0 0 10px 132px;font-size:24px;font-family:Georgia;color:#0066ff;padding-left:25px;background:url('/Public/img/jian.png') 0 -45px no-repeat;height:38px;line-height:30px;font-style:italic; }
+	.event_list li {background:url('/Public/img/jian.png') 136px -80px no-repeat;}
+	.event_list li span {width:127px;text-align:right;display:block;float:left;margin-top:10px;}
+	.event_list li p { width:680px;margin-left:24px;display:inline-block;padding-left:10px;background:url('/Public/img/jian.png') -21px 0 no-repeat;line-height:25px;_float:left; }
+	.event_list li p span { width:650px;text-align:left;border-bottom:2px solid #DDD;padding:10px 15px;background:#FFF;margin:0; }
+	</style>
+</head>
+<body>
+<div>
+	<div class="page">
+		<div class="box">
+			<ul class="event_list">
+                <div>
+                    <h3>育秧种植</h3>
+                    <li>
+                        <span>收割信息</span>
+                        <p>
+	                        <?php
+	                        	if($data1 == null){
+									echo "<span>无信息</span>";
+								}else{
+									echo "<span>农田编号："
+									.$data1['farmlandid']
+									."号农田，收割编号："
+									.$data1['productionid']
+									."，秧苗批次号：".$data1['seedid']
+									."，产量："
+									.$data1['production']
+									." t，收获日期："
+									.$data1['harvestdate']
+									."，负责人："
+									.$data1['head']
+									."</span>";
+								}
+	                        ?>
+                        </p>
+                    </li>
+                    <li>
+                        <span>育秧信息</span>
+                        <p>
+                        	<?php
+	                        	if($data2 == null){
+									echo "<span>无信息</span>";
+								}else{
+									echo "<span>托盘批次号："
+									.$data2['trayid']
+									."，育秧地点："
+									.$data2['place']
+									."，秧苗批次号："
+									.$data2['seedingid']
+									."，起始日期："
+									.$data2['startdate']
+									."，结束日期："
+									.$data2['enddate']
+									."，负责人："
+									.$data2['head']
+									."</span>";
+								}
+	                        ?>
+                        </p>
+                    </li>
+                    <li>
+                        <span>暗化信息</span>
+                        <p>
+                        	<?php
+	                        	if($data3 == null){
+									echo "<span>无信息</span>";
+								}else{
+									echo "<span>托盘批次号："
+									.$data3['trayid']
+									."，种子批次号："
+									.$data3['seedid']
+									."，托盘数量："
+									.$data3['trayamount']
+									."，暗化地点："
+									.$data3['traysite']
+									."，起始日期："
+									.$data3['startdate']
+									."，结束日期："
+									.$data3['enddate']
+									."，负责人："
+									.$data3['head']
+									."</span>";
+								}
+	                        ?>
+                        </p>
+                    </li>
+                    <li>
+                        <span>浸种信息</span>
+                        <p>
+                        	<?php
+	                        	if($data4 == null){
+									echo "<span>无信息</span>";
+								}else{
+									echo "<span>种子批次号："
+									.$data4['seedid']
+									."，药品批次号："
+									.$data4['drugid']
+									."，药品浓度："
+									.$data4['concentration']
+									." ml/l，起始日期："
+									.$data4['startdate']
+									."，结束日期："
+									.$data4['enddate']
+									."，负责人："
+									.$data4['head']
+									."</span>";
+								}
+	                        ?>
+                        </p>
+                    </li>
+                </div>
+				<div>
+					<h3>仓储</h3>
+					<li>
+					<span>入库信息</span>
+						<p>
+							<?php
+	                        	if($data5 == null){
+									echo "<span>无信息</span>";
+								}else{
+									if(is_array($data5)){
+										foreach($data5 as $key => $vo){
+											echo "<span>入库编号："
+											.$vo['putid']
+											."，品种："
+											.$vo['breed']
+											."，类型："
+											.$vo['type']
+											."，批次："
+											.$vo['batch']
+											."，重量："
+											.$vo['weight']
+											."，来源："
+											.$vo['source']
+											."，仓库号："
+											.$vo['warehouseid']
+											."，入仓日期："
+											.$vo['putdate']
+											."，操作员："
+											.$vo['admin']
+											."</span>";
+										}
+									}else{
+										echo "<span>无信息</span>";
+									}
+								}
+	                        ?>
+						</p>
+	                </li>
+					<li>
+					<span>入库信息监控</span>
+						<p>
+							<?php
+	                        	if($data6 == null){
+									echo "<span>无信息</span>";
+								}else{
+									if(is_array($data6)){
+										foreach($data6 as $key => $vo){
+											echo "<span>入库编号："
+											.$vo['warehouseinid']
+											."，理化取样号："
+											.$vo['propertyid']
+											."，营养取样号："
+											.$vo['nutritionid']
+											."，霉变："
+											.$vo['mildew']
+											."，虫害："
+											.$vo['insectpest']
+											."，原料等级："
+											.$vo['level']
+											."，日期："
+											.$vo['date']
+											."</span>";
+										}
+									}else{
+										echo "<span>无信息</span>";
+									}
+								}
+	                        ?>
+						</p>
+	                </li>
+					<li>
+					<span>入库理化信息</span>
+						<p>
+							<?php
+	                        	if($data7 == null){
+									echo "<span>无信息</span>";
+								}else{
+									if(is_array($data7)){
+										foreach($data7 as $key => $vo){
+											echo "<span>入库理化取样号："
+											.$vo['propertyid']
+											."，指标1："
+											.$vo['index1']
+											."，指标2："
+											.$vo['index2']
+											."，指标3："
+											.$vo['index3']
+											."，指标4："
+											.$vo['index4']
+											."，日期："
+											.$vo['date']
+											."</span>";
+										}
+									}else{
+										echo "<span>无信息</span>";
+									}
+								}
+	                        ?>
+						</p>
+					</li>
+				 	<li>
+					<span>入库营养信息</span>
+						<p>
+							<?php
+	                        	if($data8 == null){
+									echo "<span>无信息</span>";
+								}else{
+									if(is_array($data8)){
+										foreach($data8 as $key => $vo){
+											echo "<span>入库营养取样号："
+											.$vo['nutritionid']
+											."，指标1："
+											.$vo['index1']
+											."，指标2："
+											.$vo['index2']
+											."，指标3："
+											.$vo['index3']
+											."，指标4："
+											.$vo['index4']
+											."，日期："
+											.$vo['date']
+											."</span>";
+										}
+									}else{
+										echo "<span>无信息</span>";
+									}
+								}
+	                        ?>
+						</p>
+	                   </li>
+				 	<li>
+					<span>仓库信息监控</span>
+						<p>
+							<?php
+	                        	if($data9 == null){
+									echo "<span>无信息</span>";
+								}else{
+									if(is_array($data9)){
+										foreach($data9 as $key => $vo){
+											echo "<span>入库编号："
+											.$vo['warehouseinid']
+											."，理化取样号："
+											.$vo['propertyid']
+											."，营养取样号："
+											.$vo['nutritionid']
+											."，霉变："
+											.$vo['mildew']
+											."，虫害："
+											.$vo['insectpest']
+											."，原料等级："
+											.$vo['level']
+											."，日期："
+											.$vo['date']
+											."</span>";
+										}
+									}else{
+										echo "<span>无信息</span>";
+									}
+								}
+	                        ?>
+						</p>
+	                   </li>
+					<li>
+					<span>仓库理化特性</span>
+						<p>
+							<?php
+	                        	if($data10 == null){
+									echo "<span>无信息</span>";
+								}else{
+									if(is_array($data10)){
+										foreach($data10 as $key => $vo){
+											echo "<span>入库理化取样号："
+											.$vo['propertyid']
+											."，指标1："
+											.$vo['index1']
+											."，指标2："
+											.$vo['index2']
+											."，指标3："
+											.$vo['index3']
+											."，指标4："
+											.$vo['index4']
+											."，日期："
+											.$vo['date']
+											."</span>";
+										}
+									}else{
+										echo "<span>无信息</span>";
+									}
+								}
+	                        ?>
+						</p>
+					</li>
+				 	<li>
+					<span>仓库营养信息</span>
+						<p>
+							<?php
+	                        	if($data11 == null){
+									echo "<span>无信息</span>";
+								}else{
+									if(is_array($data11)){
+										foreach($data11 as $key => $vo){
+											echo "<span>仓库营养取样号："
+											.$vo['nutritionid']
+											."，指标1："
+											.$vo['index1']
+											."，指标2："
+											.$vo['index2']
+											."，指标3："
+											.$vo['index3']
+											."，指标4："
+											.$vo['index4']
+											."，日期："
+											.$vo['date']
+											."</span>";
+										}
+									}else{
+										echo "<span>无信息</span>";
+									}
+								}
+	                        ?>
+						</p>
+	                   </li>
+				</div>
+				<div>
+					<h3>粗加工</h3>
+					<li>
+						<span>清洗</span>
+						<p>
+							<?php
+	                        	if($clear == null){
+									echo "<span>无信息</span>";
+								}else{
+									echo "<span>清理编号："
+									.$clear['clearid']
+									."，指标1："
+									.$clear['index1']
+									."，指标2："
+									.$clear['index2']
+									."，指标3："
+									.$clear['index3']
+									."，指标4："
+									.$clear['index4']
+									."，日期："
+									.$clear['date']
+									."</span>";
+								}
+	                        ?>
+						</p>
+	                   </li>
+					<li>
+						<span>垄谷</span>
+						<p>
+							<?php
+	                        	if($ridgevalley == null){
+									echo "<span>无信息</span>";
+								}else{
+									echo "<span>垄谷编号："
+									.$ridgevalley['ridgevalleyid']
+									."，指标1："
+									.$ridgevalley['index1']
+									."，指标2："
+									.$ridgevalley['index2']
+									."，指标3："
+									.$ridgevalley['index3']
+									."，指标4："
+									.$ridgevalley['index4']
+									."，日期："
+									.$ridgevalley['date']
+									."</span>";
+								}
+	                        ?>
+						</p>
+	                   </li>
+					<li>
+						<span>碾米抛光</span>
+						<p>
+							<?php
+	                        	if($polishing == null){
+									echo "<span>无信息</span>";
+								}else{
+									echo "<span>碾米抛光编号："
+									.$polishing['polishingid']
+									."，指标1："
+									.$polishing['index1']
+									."，指标2："
+									.$polishing['index2']
+									."，指标3："
+									.$polishing['index3']
+									."，指标4："
+									.$polishing['index4']
+									."，日期："
+									.$polishing['date']
+									."</span>";
+								}
+	                        ?>
+						</p>
+	                   </li>
+					<li>
+					<span>整理</span>
+						<p>
+							<?php
+	                        	if($sortout == null){
+									echo "<span>无信息</span>";
+								}else{
+									echo "<span>整理编号："
+									.$sortout['sortoutid']
+									."，指标1："
+									.$sortout['index1']
+									."，指标2："
+									.$sortout['index2']
+									."，指标3："
+									.$sortout['index3']
+									."，指标4："
+									.$sortout['index4']
+									."，日期："
+									.$sortout['date']
+									."</span>";
+								}
+	                        ?>
+						</p>
+	                   </li>
+					<li>
+					<span>进料与出产信息</span>
+						<p>
+							<?php
+	                        	if($data13 == null){
+									echo "<span>无信息</span>";
+								}else{
+									echo "<span>进料编号："
+									.$data13['feedid']
+									."，批次号："
+									.$data13['picihao']
+									."，进料来源："
+									.$data13['source']
+									."，进料日期："
+									.$data13['adate']
+									."，出产日期："
+									.$vo['bdate']
+									."</span>";
+								}
+	                        ?>
+						</p>
+	                   </li>
+				</div>
+				<div>
+					<h3>深加工</h3>
+					<li>
+						<span>外包</span>
+						<p>
+							<?php
+	                        	if($data14 == null){
+									echo "<span>无信息</span>";
+								}else{
+									echo "<span>总重："
+									.$data14['weight']
+									."，质检："
+									.$data14['quality']
+									."，质检员："
+									.$data14['operator']
+									."，日期："
+									.$data14['date']
+									."</span>";
+								}
+	                        ?>
+						</p>
+					</li>
+					<li>
+						<span>内包</span>
+						<p>
+							<?php
+	                        	if($data19 == null){
+									echo "<span>无信息</span>";
+								}else{
+									echo "<span>指标1："
+									.$data19['index1']
+									."，指标2："
+									.$data19['index2']
+									."，指标3："
+									.$data19['index3']
+									."，质检员："
+									.$data19['operator']
+									."，日期："
+									.$data19['date']
+									."</span>";
+								}
+	                        ?>
+						</p>
+					</li>
+					<li>
+						<span>冷却/灭菌</span>
+						<p>
+							<?php
+	                        	if($data18 == null){
+									echo "<span>无信息</span>";
+								}else{
+									echo "<span>指标1："
+									.$data18['index1']
+									."，指标2："
+									.$data18['index2']
+									."，指标3："
+									.$data18['index3']
+									."，质检员："
+									.$data18['operator']
+									."，日期："
+									.$data18['date']
+									."</span>";
+								}
+	                        ?>
+						</p>
+					</li>
+					<li>
+						<span>脱模</span>
+						<p>
+							<?php
+	                        	if($data17 == null){
+									echo "<span>无信息</span>";
+								}else{
+									echo "<span>指标1："
+									.$data17['index1']
+									."，指标2："
+									.$data17['index2']
+									."，指标3："
+									.$data17['index3']
+									."，质检员："
+									.$data17['operator']
+									."，日期："
+									.$data17['date']
+									."</span>";
+								}
+	                        ?>
+						</p>
+					</li>
+					<li>
+						<span>烘烤</span>
+						<p>
+							<?php
+	                        	if($data16 == null){
+									echo "<span>无信息</span>";
+								}else{
+									echo "<span>指标1："
+									.$data16['index1']
+									."，指标2："
+									.$data16['index2']
+									."，指标3："
+									.$data16['index3']
+									."，质检员："
+									.$data16['operator']
+									."，日期："
+									.$data16['date']
+									."</span>";
+								}
+	                        ?>
+						</p>
+					</li>
+					<li>
+						<span>注模</span>
+						<p>
+							<?php
+	                        	if($data15 == null){
+									echo "<span>无信息</span>";
+								}else{
+									echo "<span>重量："
+									.$data15['weight']
+									."，感官："
+									.$data15['sensory']
+									."，指标1："
+									.$data15['index1']
+									."，质检员："
+									.$data15['operator']
+									."，日期："
+									.$data15['date']
+									."</span>";
+								}
+	                        ?>
+						</p>
+					</li>
+				</div>
+			</ul>
+		</div>
+	</div>
+</div>
+</body>
+</html>

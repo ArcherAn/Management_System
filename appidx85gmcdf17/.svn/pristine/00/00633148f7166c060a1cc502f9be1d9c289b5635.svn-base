@@ -1,0 +1,4 @@
+<extend name="Myapp/Tpl/Public/model.html"/>
+        <block name="title"><title>首页</title></block>
+        <block name="content">
+            </block>

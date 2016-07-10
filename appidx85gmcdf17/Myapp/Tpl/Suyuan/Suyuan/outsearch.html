@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-CN">
+    <meta charset="utf-8">
+    <title>仓库溯源</title>
+	<style>
+	body,div,ul,li,h3,p{margin:0;padding:0;}
+	ul li{list-style:none;}
+	html{-webkit-text-size-adjust:none;-ms-text-size-adjust:none;}
+	.page {display:table;margin:10px auto;background: #F0F0F0;-moz-box-shadow: 0 5px 20px #CCCCCC;-webkit-box-shadow: 0 5px 20px #CCCCCC;box-shadow: 0 5px 20px #CCCCCC;}
+	.box {width:900px;margin:18px auto 0 auto; }
+	.event_list {width:850px;float:right;background:url('/Public/img/dian3.png') 139px 0 repeat-y;margin:10px 0 20px 0; }
+	.event_list h3 {margin:0 0 10px 132px;font-size:24px;font-family:Georgia;color:#0066ff;padding-left:25px;background:url('/Public/img/jian.png') 0 -45px no-repeat;height:38px;line-height:30px;font-style:italic; }
+	.event_list li {background:url('/Public/img/jian.png') 136px -80px no-repeat;}
+	.event_list li span {width:127px;text-align:right;display:block;float:left;margin-top:10px;}
+	.event_list li p { width:680px;margin-left:24px;display:inline-block;padding-left:10px;background:url('/Public/img/jian.png') -21px 0 no-repeat;line-height:25px;_float:left; }
+	.event_list li p span { width:650px;text-align:left;border-bottom:2px solid #DDD;padding:10px 15px;background:#FFF;margin:0; }
+	</style>
+</head>
+<body>
+
+<div>
+        <form action="__APP__/Suyuan/Suyuan/outsearch" method="get">
+     
+          出库编号： <input name="keywords" type="text" placeholder="请输入批次号" style="width: 200px;height: 30px">
+                    <button type="submit" >查询</button>
+         </form>
+</div>
+<div>
+	<div class="page">
+		<div class="box">
+			<ul class="event_list">
+				<div>
+					<h3>仓储</h3>
+					<li>
+					<span>入库信息</span>
+						<p>
+						<volist name='data0' id='vo'>
+							<span>                     
+                                  入库编号：<{$vo.putid}></th>
+                                  <th>品种：<{$vo.breed}></th>
+                                  <th>类型：<{$vo.type}></th>
+	                              <th >批次：<{$vo.batch}></th>
+	                              <th>重量：<{$vo.weight}></th>
+	                              <th>来源：<{$vo.source}></th>
+	                              <th>仓库号：<{$vo.warehouseid}></th>
+	                              <th>入仓日期;<{$vo.putdate}></th>
+	                              <th>操作员:<{$vo.admin}></th>
+                              </span>
+						</volist>
+						</p>
+                    </li>
+					
+					<li>
+					<span>入库信息监控</span>
+						<p>
+						<volist name='data1' id='vo'>
+							<span>                     
+                                      <th>入库编号：<{$vo.warehouseinid}></th>
+                                      <th>理化取样号：<{$vo.propertyid}></th>
+                                      <th>营养取样号：<{$vo.nutritionid}></th>
+	                                  <th>霉变：<{$vo.mildew}></th>
+	                                  <th>虫害：<{$vo.insectpest}></th>
+	                                  <th>原料等级：<{$vo.level}></th>
+	                                  <th>日期：<{$vo.date}></th>
+                             </span>
+						</volist>
+						</p>
+                    </li>
+					
+					<li>
+					<span>入库理化信息</span>
+						<p>
+						<volist name='data2' id='vo'>
+							<span>                     
+                                      <th>入库理化取样号：<{$vo.propertyid}></th>
+                                      <th>指标1：<{$vo.index1}></th>
+									  <th>指标2：<{$vo.index2}></th>
+									  <th>指标3：<{$vo.index3}></th>
+									  <th>指标4：<{$vo.index4}></th>
+	                                  <th>日期：<{$vo.date}></th>
+                             </span>
+						</volist>
+						</p>
+					<span>入库营养信息</span>
+						<p>
+						<volist name='data3' id='vo'>
+							<span>                     
+                                      <th>入库营养取样号：<{$vo.nutritionid}></th>
+                                      <th>指标1：<{$vo.index1}></th>
+									  <th>指标2：<{$vo.index2}></th>
+									  <th>指标3：<{$vo.index3}></th>
+									  <th>指标4：<{$vo.index4}></th>
+	                                  <th>日期：<{$vo.date}></th>
+                             </span>
+						</volist>
+						</p>
+                    </li>
+					
+					
+					
+					
+					
+					
+				 <li>
+					<span>仓库信息监控</span>
+						<p>
+						<volist name='data4' id='vo'>
+							<span>                     
+                                      <th>仓库编号：<{$vo.warehouseinid}></th>
+                                      <th>理化取样号：<{$vo.propertyid}></th>
+                                      <th>营养取样号：<{$vo.nutritionid}></th>
+	                                  <th>霉变：<{$vo.mildew}></th>
+	                                  <th>虫害：<{$vo.insectpest}></th>
+	                                  <th>原料等级：<{$vo.level}></th>
+	                                  <th>日期：<{$vo.date}></th>
+                             </span>
+						</volist>
+						</p>
+                    </li>
+					
+					<li>
+					<span>仓库理化特性</span>
+						<p>
+						<volist name='data5' id='vo'>
+							<span>                     
+                                      <th>仓库理化取样号：<{$vo.propertyid}></th>
+                                      <th>指标1：<{$vo.index1}></th>
+									  <th>指标2：<{$vo.index2}></th>
+									  <th>指标3：<{$vo.index3}></th>
+									  <th>指标4：<{$vo.index4}></th>
+	                                  <th>日期：<{$vo.date}></th>
+                             </span>
+						</volist>
+						</p>
+					<span>仓库营养信息</span>
+						<p>
+						<volist name='data6' id='vo'>
+							<span>                     
+                                      <th>仓库营养取样号：<{$vo.nutritionid}></th>
+                                      <th>指标1：<{$vo.index1}></th>
+									  <th>指标2：<{$vo.index2}></th>
+									  <th>指标3：<{$vo.index3}></th>
+									  <th>指标4：<{$vo.index4}></th>
+	                                  <th>日期：<{$vo.date}></th>
+                             </span>
+						</volist>
+						</p>
+                    </li>
+					
+				</div>
+			</ul>
+		</div>
+	</div>
+</div>
+</body>
+</html>

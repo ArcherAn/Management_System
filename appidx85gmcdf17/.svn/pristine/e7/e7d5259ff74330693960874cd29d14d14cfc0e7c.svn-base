@@ -1,0 +1,67 @@
+<extend name="Myapp/Tpl/Public/model.html" />
+<block name="title">
+<title>大米加工</title>
+</block>
+<block name="content">
+<script>
+document.getElementById('jiagong').click();
+</script>
+<script>
+	function jump(){
+	    window.location="__APP__/Process/Process/add";
+	}
+</script>
+<div>
+	<div style="height: 50px">
+		<span style="margin-top: 5px; font-size: 28px">阅读器管理</span><span
+			style="font-size: 14px; margin-top: 3px;">&nbsp;加工管理平台</span>
+	</div>
+	<div style="background-color: #b1bab7; height: 30px">
+		<span style="margin-top: 5px; float: left">主页&nbsp;>&nbsp;加工&nbsp;>&nbsp;大米加工&nbsp;>&nbsp;设备工艺参数信息</span>
+	</div>
+	<div style="margin-top: 10px;">
+		<form action="__APP__/Process/Process/index" method="get">
+			<span style="font-size: 20px; float: left">机器编号：</span>
+			<span style="float: left; margin-left: 10px">
+			<input name="machineid" type="text" placeholder="请输入要搜索" class="form-control"
+				style="width: 200px; height: 30px"></span>
+			<span><button type="submit" class="btn btn-primary btn-sm"
+					style="float: left; margin-left: 10px;">查询</button></span>
+			<span><button type="button" class="btn btn-success btn-sm"
+					style="float: left; margin-left: 10px" onclick="jump()">新增信息</button></span>
+		</form>
+	</div>
+	<div>
+		<table class="table table-striped table-bordered" style="margin-top: 50px;align:center;">
+			<thead>
+				<tr>
+					<th>机器编号</th>
+					<th>进料编号</th>
+					<th>参数1</th>
+					<th>参数2</th>
+					<th>参数3</th>
+					<th>参数4</th>
+					<th>参数5</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				<volist name='data' id='vo'>
+				<tr>
+					<td><{$vo.machineid}></td>
+					<td><{$vo.feedid}></td>
+					<td><{$vo.parameters1}></td>
+					<td><{$vo.Parameters2}></td>
+					<td><{$vo.Parameters3}></td>
+					<td><{$vo.Parameters4}></td>
+					<td><{$vo.Parameters5}></td>
+					<td><a href="__APP__/Process/Process/modify/id/<{$vo.id}>">修改</a> |
+						<a href="__APP__/Process/Process/delete/id/<{$vo.id}>" onclick="return confirm('确认删除？');">删除</a></td>
+				</tr>
+				</volist>
+			</tbody>
+		</table>
+	</div>
+	<div align="center">[<{$page}>]</div>
+</div>
+</block>

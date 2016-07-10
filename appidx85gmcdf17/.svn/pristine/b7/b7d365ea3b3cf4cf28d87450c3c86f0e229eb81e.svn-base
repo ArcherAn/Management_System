@@ -1,0 +1,87 @@
+<extend name="Myapp/Tpl/Public/model.html"/>
+<block name="title"><title>药品信息添加</title></block>
+<block name="diyStyle">
+    <style>
+        div.table-responsive{margin-left:5%;margin-top:1%;}
+    </style>
+</block>
+<block name="content">
+    <div class="table-responsive">
+        <form action="__APP__/Seedlings/Drug/insert_database_druginfo" method="post">
+            <table class="table table-bordered">
+                <tr style="height:45px">
+                    <td colspan="5" align="center" bgcolor="#E9E9E9">药品信息添加</td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="width: 150px;background-color:#E9E9E9">药品批次号</td>
+                    <td ><input class="form-control" placeholder="如：001" style="width: 250px;height: 30px" id="drugid" type="text"/></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color:#E9E9E9">药品名称</td>
+                    <td><input class="form-control" placeholder="如：**消毒剂" style="width: 250px;height: 30px" id="drugname" type="text" /></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color:#E9E9E9">生产标准</td>
+                    <td><input class="form-control" placeholder="如：国标" style="width: 250px;height: 30px" id="prostandard" type="text" /></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color:#E9E9E9">剂型</td>
+                    <td><input class="form-control" placeholder="如：液态" style="width: 250px;height: 30px" id="dosageform" type="text" /></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color: #E9E9E9">作用</td>
+                    <td><input class="form-control" placeholder="如：消毒" style="width: 250px;height: 30px" id="function" type="text" /></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color:#E9E9E9"></td>
+                    <td><input class="btn btn-primary" id="apply" type="submit" value="确认添加" /></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <script>
+        $(function() {
+            $("#apply").click(function(){
+                if(confirm('确认添加？')){
+                    var a=$('#drugid').val();
+                    var b=$('#drugname').val();
+                    var c=$('#prostandard').val();
+                    var d=$('#dosageform').val();
+                    var e=$('#function').val();
+                    var url='__APP__/Seedlings/Drug/insert_database_druginfo';
+                    if(a == ""){
+                        alert("请填写药品批次号！");
+                        return false;}
+                    if(b == "") {
+                        alert("请填写药品名称！");
+                        return false;}
+                    if(c == "") {
+                        alert("请填写生产标准！");
+                        return false;}
+                    if(d == "") {
+                        alert("请填写剂型！");
+                        return false;}
+                    if(e == "") {
+                        alert("请填写作用！");
+                        return false;}
+                    var data={
+                        drugid:a,
+                        drugname:b,
+                        prostandard:c,
+                        dosageform:d,
+                        function:e,
+                        hidden:$('#hash').val()
+                    };
+                    $(this).attr("disabled",true);
+                    $(this).val("数据处理中.....");
+                    $.post(url,data,function(data){
+                        alert(data.info);
+                        window.location.href=data.url;
+                    });
+                    $(this).val("数据处理成功.....");
+                    return true;
+                }
+            });
+        });
+    </script>
+</block>

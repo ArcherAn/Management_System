@@ -1,0 +1,137 @@
+<extend name="Myapp/Tpl/Public/model.html"/>
+<block name="title"><title>设备信息添加（深加工）</title></block>
+<block name="diyStyle">
+	<style>
+		td#atr{width:10%;text-align:center;}
+		td#input{width:50%;}
+		div.table-responsive{margin-left:5%;margin-top:1%;}
+		caption {text-align:center;background-color:#E9E9E9;}
+	</style>
+</block>
+    <block name="content">
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered table-hover">
+            	<thead>
+            		<caption>设备信息添加</caption>
+            	</thead>
+            	<tbody>
+	                <tr>
+	                    <td id="atr">机器编号</td>
+	                    <td id="input">
+	                    	<input class="form-control" placeholder="如：20080101" id="machineid" type="text"/>
+	                    </td>
+	                </tr>
+	                <tr>
+	                    <td id="atr">类型</td>
+	                    <td id="input">
+	                    	<input class="form-control" placeholder="如：收割机" id="type" type="text"/>
+	                    </td>
+	                </tr>
+	                <tr>
+	                    <td id="atr">型号</td>
+	                    <td id="input">
+	                    	<input class="form-control" placeholder="如：ZX304" id="model" type="text"/>
+	                    </td>
+	                </tr>
+	                <tr>
+	                    <td id="atr">生产线</td>
+	                    <td id="input">
+	                    	<input class="form-control" placeholder="如：一号线" id="line" type="text"/>
+	                    </td>
+	                </tr>
+	                <tr>
+	                    <td id="atr">购买日期</td>
+	                    <td id="input">
+	                    	<input class="form-control" placeholder="如：2008-01-01" id="date" type="text"/>
+	                    </td>
+	                </tr>
+	                <tr>
+	                    <td id="atr">所属车间</td>
+	                    <td id="input">
+	                    	<input class="form-control" placeholder="如：原料加工" id="workshop" type="text"/>
+	                    </td>
+	                </tr>
+	                <tr>
+	                    <td id="atr">效率</td>
+	                    <td id="input">
+	                    	<input class="form-control" placeholder="如：" id="efficiency" type="text"/>
+	                    </td>
+	                </tr>
+	                <tr>
+	                    <td id="atr">状态</td>
+	                    <td id="input">
+	                    	<input class="form-control" placeholder="如：正常" id="state" type="text"/>
+	                    </td>
+	                </tr>
+            	</tbody>
+            	<tfoot>
+	      			<tr>
+	                    <td id="atr"></td>
+	                    <td id="input">
+	                    	<input class="btn btn-primary" id="apply" type="submit" value="确认添加" />
+	                    </td>
+	                </tr>
+            	</tfoot>
+            </table>
+        </div>
+        <script>
+        $(function() {
+                $("#apply").click(function(){
+                	if(confirm('确认添加？')){
+	                    var a=$('#machineid').val();
+	                    var b=$('#type').val();
+	                    var c=$('#model').val();
+	                    var d=$('#line').val();
+	                    var e=$('#date').val();
+	                    var f=$('#workshop').val();
+	                    var g=$('#efficiency').val();
+	                    var h=$('#state').val();
+	                    var url='__APP__/Deepprocess/Equip/insert_database';
+	                    if(a == ""){
+	                        alert("请填写机器编号！");
+	                        return false;}
+	                    if(b == "") {
+	                        alert("请填写类型！");
+	                        return false;}
+	                    if(c == "") {
+	                        alert("请填写型号！");
+	                        return false;}
+	                    if(d == "") {
+	                        alert("请填写生产线！");
+	                        return false;}
+	                    if(e == "") {
+	                        alert("请填写购买日期！");
+	                        return false;}
+	                    if(f == ""){
+	                        alert("请填写所属车间！");
+	                        return false;}
+	                    if(g == ""){
+	                        alert("请填写效率！");
+	                        return false;}
+	                    if(h == ""){
+	                        alert("请填写状态！");
+	                        return false;}
+	                    var data={
+	                    	machineid:a,
+	                        type:b,
+	                        model:c,
+	                        line:d,
+	                        date:e,
+	                        workshop:f,
+	                        efficiency:g,
+	                        state:h,
+	                        hidden:$('#hash').val()
+	                    };
+	                    $(this).attr("disabled",true);
+	                    $(this).val("数据处理中.....");
+	                    $.post(url,data,function(data){
+	                        alert(data.info);
+	                        window.location.href=data.url;
+	                    });
+	                    $(this).val("数据处理成功.....");
+	                    return true;
+                	}
+                });
+            });
+        </script>
+    </block>

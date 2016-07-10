@@ -1,0 +1,124 @@
+<extend name="Myapp/Tpl/Public/model.html"/>
+<block name="title"><title>浸种操作信息添加</title></block>
+<block name="diyStyle">
+    <style>
+        div.table-responsive{margin-left:5%;margin-top:1%;}
+    </style>
+</block>
+<block name="content">
+    <div class="table-responsive">
+        <form action="__APP__/Seedlings/Seed/insert_database_soakoperate" method="post">
+            <table class="table table-bordered">
+                <tr style="height:45px">
+                    <td colspan="5" align="center" bgcolor="#E9E9E9">浸种操作信息添加</td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="width: 150px;background-color:#E9E9E9">种子批次号</td>
+                    <td ><input class="form-control" placeholder="如：0001" style="width: 250px;height: 30px" id="seedid" type="text"/></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color:#E9E9E9">药品批次号</td>
+                    <td><input class="form-control" placeholder="如：002" style="width: 250px;height: 30px" id="drugid" type="text" /></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color:#E9E9E9">药品浓度</td>
+                    <td><input class="form-control" placeholder="如：16" style="width: 250px;height: 30px" id="concentration" type="text" /></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color: #E9E9E9">起始日期</td>
+                    <td>
+                        <div class="form-group">
+                            <div class="input-group date form_date"data-date="" data-date-format="" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                                <input class="form-control" placeholder="如：2015-3-15" style="width: 250px;height: 30px" id="startdate" type="text"  readonly/>
+                                <span class="input-group-addon" style="float: left"><span class="glyphicon glyphicon-calendar"></span></span>
+                            </div>
+                            <input type="hidden" id="dtp_input1" value="" /><br/>
+                        </div>
+                    </td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color: #E9E9E9">截止日期</td>
+                    <td>
+                        <div class="form-group">
+                            <div class="input-group date form_date"data-date="" data-date-format="" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                                <input class="form-control" placeholder="如：2015-3-15" style="width: 250px;height: 30px" id="enddate" type="text"  readonly/>
+                                <span class="input-group-addon" style="float: left"><span class="glyphicon glyphicon-calendar"></span></span>
+                            </div>
+                            <input type="hidden" id="dtp_input2" value="" /><br/>
+                        </div>
+                    </td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color:#E9E9E9">操作员</td>
+                    <td><input class="form-control" placeholder="如：张三" style="width: 250px;height: 30px" id="operator" type="text" /></td>
+                </tr>
+                <tr style="height:45px">
+                    <td style="background-color:#E9E9E9"></td>
+                    <td><input class="btn btn-primary" id="apply" type="submit" value="确认添加" /></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <script>
+        $(function() {
+            $("#apply").click(function(){
+                if(confirm('确认添加？')){
+                    var a=$('#seedid').val();
+                    var b=$('#drugid').val();
+                    var c=$('#concentration').val();
+                    var d=$('#startdate').val();
+                    var e=$('#enddate').val();
+                    var f=$('#operator').val();
+                    var url='__APP__/Seedlings/Seed/insert_database_soakoperate';
+                    if(a == ""){
+                        alert("请填写种子批次号！");
+                        return false;}
+                    if(b == "") {
+                        alert("请填写药品批次号！");
+                        return false;}
+                    if(c == "") {
+                        alert("请填写药品浓度！");
+                        return false;}
+                    if(d == "") {
+                        alert("请填写起始日期！");
+                        return false;}
+                    if(e == "") {
+                        alert("请填写截止日期！");
+                        return false;}
+                    if(f== ""){
+                        alert("请填写操作员！");
+                        return false;}
+                    var data={
+                        seedid:a,
+                        drugid:b,
+                        concentration:c,
+                        startdate:d,
+                        enddate:e,
+                        operator:f,
+                        hidden:$('#hash').val()
+                    };
+                    $(this).attr("disabled",true);
+                    $(this).val("数据处理中.....");
+                    $.post(url,data,function(data){
+                        alert(data.info);
+                        window.location.href=data.url;
+                    });
+                    $(this).val("数据处理成功.....");
+                    return true;
+                }
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        $('.form_date').datetimepicker({
+            language: 'zh-CN',
+            weekStart: 1,
+            todayBtn: 1,
+            autoclose: 1,
+            todayHighlight: 1,
+            startView: 2,
+            minView: 2,
+            forceParse: 0
+        });
+    </script>
+</block>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-CN">
+    <meta charset="utf-8">
+    <title>深加工溯源</title>
+	<style>
+	body,div,ul,li,h3,p{margin:0;padding:0;}
+	ul li{list-style:none;}
+	html{-webkit-text-size-adjust:none;-ms-text-size-adjust:none;}
+	.page {display:table;margin:10px auto;background: #F0F0F0;-moz-box-shadow: 0 5px 20px #CCCCCC;-webkit-box-shadow: 0 5px 20px #CCCCCC;box-shadow: 0 5px 20px #CCCCCC;}
+	.box {width:900px;margin:18px auto 0 auto; }
+	.event_list {width:850px;float:right;background:url('/Public/img/dian3.png') 139px 0 repeat-y;margin:10px 0 20px 0; }
+	.event_list h3 {margin:0 0 10px 132px;font-size:24px;font-family:Georgia;color:#0066ff;padding-left:25px;background:url('/Public/img/jian.png') 0 -45px no-repeat;height:38px;line-height:30px;font-style:italic; }
+	.event_list li {background:url('/Public/img/jian.png') 136px -80px no-repeat;}
+	.event_list li span {width:127px;text-align:right;display:block;float:left;margin-top:10px;}
+	.event_list li p { width:680px;margin-left:24px;display:inline-block;padding-left:10px;background:url('/Public/img/jian.png') -21px 0 no-repeat;line-height:25px;_float:left; }
+	.event_list li p span { width:650px;text-align:left;border-bottom:2px solid #DDD;padding:10px 15px;background:#FFF;margin:0; }
+	</style>
+</head>
+<body>
+<div>
+	<div class="page">
+		<div class="box">
+			<ul class="event_list">
+				<div>
+					<h3>深加工</h3>
+					<li>
+						<span>外包</span>
+						<p>
+							<span>总重：<{$data.weight}>，质检：<{$data.quality}>，质检员：<{$data.operator}>，日期：<{$data.date}></span>
+						</p>
+					</li>
+					<li>
+						<span>内包</span>
+						<p>
+							<span>指标1：<{$data5.index1}>，指标2：<{$data5.index2}>，指标3：<{$data5.index3}>，质检员：<{$data5.operator}>，日期：<{$data5.date}></span>
+						</p>
+					</li>
+					<li>
+						<span>冷却/灭菌</span>
+						<p>
+							<span>指标1：<{$data4.index1}>，指标2：<{$data4.index2}>，指标3：<{$data4.index3}>，质检员：<{$data4.operator}>，日期：<{$data4.date}></span>
+						</p>
+					</li>
+					<li>
+						<span>脱模</span>
+						<p>
+							<span>指标1：<{$data3.index1}>，指标2：<{$data3.index2}>，指标3：<{$data3.index3}>，质检员：<{$data3.operator}>，日期：<{$data3.date}></span>
+						</p>
+					</li>
+					<li>
+						<span>烘烤</span>
+						<p>
+							<span>指标1：<{$data2.index1}>，指标2：<{$data2.index2}>，指标3：<{$data2.index3}>，质检员：<{$data2.operator}>，日期：<{$data2.date}></span>
+						</p>
+					</li>
+					<li>
+						<span>注模</span>
+						<p>
+							<span>重量：<{$data1.weight}>，感官：<{$data1.sensory}>，指标1：<{$data1.index1}>，质检员：<{$data1.operator}>，日期：<{$data1.date}></span>
+						</p>
+					</li>
+				</div>
+			</ul>
+		</div>
+	</div>
+</div>
+</body>
+</html>
